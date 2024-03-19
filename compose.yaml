@@ -1,0 +1,49 @@
+services:
+  api:
+    build: ./backend/
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./backend:/api
+    environment:
+      TZ: "Asia/Tokyo"
+    ports:
+      - 3001:3000
+    depends_on:
+      - db
+    tty: true
+    stdin_open: true
+    networks:
+      - mynetwork
+
+  db:
+    image: mysql:latest
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-time-zone=+09:00
+    volumes:
+      - db-volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3306:3306"
+    networks:
+      - mynetwork
+
+  front:
+    build: ./frontend/
+    volumes:
+      - ./frontend/src:/front
+    ports:
+      - "3000:3000"
+    environment:
+      - WATCHPACK_POLLING=true
+      - TZ=Asia/Tokyo
+    command: sh -c "npm install && npm run dev"
+    networks:
+      - mynetwork
+
+volumes:
+  db-volume:
+
+networks:
+  mynetwork:
+    external: true
