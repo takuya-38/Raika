@@ -1,0 +1,47 @@
+@startuml test
+hide circle
+skinparam linetype ortho
+
+entity "events" as events {
+    * <<PK>> id
+    --
+    * <<FK>> age_group_id : integer
+    * <<u>> google_calendar_id    : integer
+    * gender  : integer
+    * total_price : integer
+    created_at      : date
+    updated_at      : date
+}
+
+entity "age_groups" as age_groups {
+    * <<PK>> id
+    --
+    * name : string
+    created_at      : date
+    updated_at      : date
+}
+
+entity "selected_menus" as selected_menus {
+    * <<PK>> id
+    --
+    * <<FK>> menu_id : integer
+    * <<FK>> event_id : integer
+    created_at      : date
+    updated_at      : date
+}
+
+
+entity "menus" as menus {
+    * <<PK>> id
+    --
+    * name : string
+    * price : integer
+    created_at      : date
+    updated_at      : date
+}
+
+events }|..|| age_groups
+events ||..|{ selected_menus
+selected_menus }|..|| menus
+
+@enduml
