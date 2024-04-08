@@ -12,11 +12,10 @@ class GoogleCalendarService < BaseService
     @calendar_id = ENV["GOOGLE_CALENDAR_ID"]
   end
 
-  def create(summary:, description:, location:, start:, end_:)
+  def create(summary:, description:, start:, end_:)
     event = build_event(
       summary: summary,
       description: description,
-      location: location,
       start: start,
       end_: end_
     )
@@ -27,16 +26,18 @@ class GoogleCalendarService < BaseService
   def list_events(time_min:, time_max:)
     @calendar.list_events(
       @calendar_id,
+      max_results: 2500,
       time_min: time_min,
-      time_max: time_max
+      time_max: time_max,
+      single_events: true,
+      order_by: "startTime"
     )
   end
 
-  def update(event_id:, summary:, description:, location:, start:, end_:)
+  def update(event_id:, summary:, description:, start:, end_:)
     event = build_event(
       summary: summary,
       description: description,
-      location: location,
       start: start,
       end_: end_
     )
@@ -57,11 +58,10 @@ class GoogleCalendarService < BaseService
       credential
     end
 
-    def build_event(summary:, description:, location:, start:, end_:)
+    def build_event(summary:, description:, start:, end_:)
       Google::Apis::CalendarV3::Event.new(
         summary: summary,
         description: description,
-        location: location,
         start: Google::Apis::CalendarV3::EventDateTime.new(date_time: start),
         end: Google::Apis::CalendarV3::EventDateTime.new(date_time: end_)
       )
