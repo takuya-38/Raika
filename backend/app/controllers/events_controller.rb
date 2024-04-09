@@ -4,7 +4,7 @@ class EventsController < ApplicationController
     time_min = DateTime.new(current_year, 1, 1, 0, 0, 0, "+09:00").rfc3339
     time_max = DateTime.new(current_year + 1, 1, 1, 0, 0, 0, "+09:00").rfc3339
 
-    events = GoogleCalendarService.new.list_events(
+    events = Events::IndexService.new.call(
       time_min: time_min,
       time_max: time_max
     )
@@ -13,7 +13,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    GoogleCalendarService.new.create(
+    Events::CreateService.new.call(
       summary: params[:summary],
       description: params[:description],
       start: DateTime.parse(params[:start]),
@@ -24,7 +24,7 @@ class EventsController < ApplicationController
   end
 
   def update
-    GoogleCalendarService.new.update(
+    Events::UpdateService.new.call(
       event_id: params[:id],
       summary: params[:summary],
       description: params[:description],
@@ -36,7 +36,7 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    GoogleCalendarService.new.delete(
+    Events::DeleteService.new.call(
       event_id: params[:id]
     )
 
