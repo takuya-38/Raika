@@ -28,5 +28,8 @@ module Api
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # Add the services directory to eager load paths
+    config.eager_load_paths << Rails.root.join("app", "services")
   end
 end
