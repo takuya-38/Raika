@@ -1,4 +1,4 @@
-class EventsController < ApplicationController
+class GoogleCalendarController < ApplicationController
   def index
     current_year = Date.today.year
     time_min = DateTime.new(current_year, 1, 1, 0, 0, 0, "+09:00").rfc3339
