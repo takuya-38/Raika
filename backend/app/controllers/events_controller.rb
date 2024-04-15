@@ -1,6 +1,5 @@
 class EventsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
-  before_action :set_event, only: %i[ update destroy ]
+  before_action :set_event, only: [:update, :destroy]
 
   def index
     events = Event.all
@@ -10,38 +9,29 @@ class EventsController < ApplicationController
   def create
     event = Event.new(event_params)
 
-    Event.transaction do
+    event.transaction do
       if event.save
-        selected_menu_params[:menus].each do |menu|
-          event.selected_menus.create!(menu_id: menu[:id], price: menu[:price])
-        end
+        create_selected_menus(event)
         render json: event, status: :created
       else
         render json: { errors: event.errors.full_messages }, status: :unprocessable_entity
-        raise ActiveRecord::Rollback
       end
     end
-  rescue ActiveRecord::RecordInvalid => e
-    render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
+  rescue ActiveRecord::RecordInvalid => error
+    render json: { "errors": error.record.errors.full_messages }, status: :unprocessable_entity
   end
 
   def update
-    Event.transaction do
-      @event.selected_menus.destroy_all
-
-      selected_menu_params[:menus].each do |menu|
-        @event.selected_menus.create!(menu_id: menu[:id], price: menu[:price])
-      end
-
+    @event.transaction do
       if @event.update(event_params)
+        update_selected_menus(@event)
         render json: @event
       else
         render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
-        raise ActiveRecord::Rollback
       end
     end
-  rescue ActiveRecord::RecordInvalid => e
-    render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
+  rescue ActiveRecord::RecordInvalid => error
+    render json: { "errors": error.record.errors.full_messages }, status: :unprocessable_entity
   end
 
   def destroy
@@ -62,7 +52,16 @@ class EventsController < ApplicationController
       params.require(:event).permit(menus: [:id, :price])
     end
 
-    def record_not_found
-      render json: { error: "Event not found" }, status: :not_found
+    def create_selected_menus(event)
+      selected_menu_params[:menus].each do |menu|
+        event.selected_menus.create!(menu_id: menu[:id], price: menu[:price])
+      end
+    end
+
+    def update_selected_menus(event)
+      event.selected_menus.destroy_all
+      selected_menu_params[:menus].each do |menu|
+        event.selected_menus.create!(menu_id: menu[:id], price: menu[:price])
+      end
     end
 end
