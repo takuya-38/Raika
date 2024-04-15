@@ -4,7 +4,6 @@ class CreateEvents < ActiveRecord::Migration[7.1]
       t.integer :age_group_id
       t.integer :google_calendar_id
       t.integer :gender
-      t.integer :total_price
 
       t.timestamps
     end
