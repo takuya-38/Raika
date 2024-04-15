@@ -14,7 +14,6 @@ class EventsController < ApplicationController
       if event.save
         selected_menu_params[:menus].each do |menu|
           event.selected_menus.create!(menu_id: menu[:id], price: menu[:price])
-          Rails.logger.debug menu
         end
         render json: event, status: :created
       else
@@ -24,6 +23,30 @@ class EventsController < ApplicationController
     end
   rescue ActiveRecord::RecordInvalid => e
     render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
+  end
+
+  def update
+    Event.transaction do
+      @event.selected_menus.destroy_all
+
+      selected_menu_params[:menus].each do |menu|
+        @event.selected_menus.create!(menu_id: menu[:id], price: menu[:price])
+      end
+
+      if @event.update(event_params)
+        render json: @event
+      else
+        render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
+        raise ActiveRecord::Rollback
+      end
+    end
+  rescue ActiveRecord::RecordInvalid => e
+    render json: { errors: e.record.errors.full_messages }, status: :unprocessable_entity
+  end
+
+  def destroy
+    @event.destroy
+    head :no_content
   end
 
   private
