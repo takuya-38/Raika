@@ -21,7 +21,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_003435) do
     t.integer "age_group_id"
     t.integer "google_calendar_id"
     t.integer "gender"
-    t.integer "total_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,6 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_003435) do
   create_table "selected_menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "menu_id"
     t.integer "event_id"
+    t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
