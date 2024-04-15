@@ -1,45 +1,67 @@
 class EventsController < ApplicationController
+  before_action :set_event, only: [:update, :destroy]
+
   def index
-    current_year = Date.today.year
-    time_min = DateTime.new(current_year, 1, 1, 0, 0, 0, "+09:00").rfc3339
-    time_max = DateTime.new(current_year + 1, 1, 1, 0, 0, 0, "+09:00").rfc3339
-
-    events = Events::IndexService.new.call(
-      time_min: time_min,
-      time_max: time_max
-    )
-
-    render json: events.items, status: :ok
+    events = Event.all
+    render json: events
   end
 
   def create
-    Events::CreateService.new.call(
-      summary: params[:summary],
-      description: params[:description],
-      start: DateTime.parse(params[:start]),
-      end_: DateTime.parse(params[:end_])
-    )
+    event = Event.new(event_params)
 
-    render status: :created
+    event.transaction do
+      if event.save
+        create_selected_menus(event)
+        render json: event, status: :created
+      else
+        render json: { errors: event.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+  rescue ActiveRecord::RecordInvalid => error
+    render json: { "errors": error.record.errors.full_messages }, status: :unprocessable_entity
   end
 
   def update
-    Events::UpdateService.new.call(
-      event_id: params[:id],
-      summary: params[:summary],
-      description: params[:description],
-      start: DateTime.parse(params[:start]),
-      end_: DateTime.parse(params[:end_])
-    )
-
-    render status: :no_content
+    @event.transaction do
+      if @event.update(event_params)
+        update_selected_menus(@event)
+        render json: @event
+      else
+        render json: { errors: @event.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+  rescue ActiveRecord::RecordInvalid => error
+    render json: { "errors": error.record.errors.full_messages }, status: :unprocessable_entity
   end
 
   def destroy
-    Events::DeleteService.new.call(
-      event_id: params[:id]
-    )
-
-    render status: :no_content
+    @event.destroy
+    head :no_content
   end
+
+  private
+    def set_event
+      @event = Event.find(params[:id])
+    end
+
+    def event_params
+      params.require(:event).permit(:age_group_id, :google_calendar_id, :gender, :total_price)
+    end
+
+    def selected_menu_params
+      params.require(:event).permit(menus: [:id, :price])
+    end
+
+    def create_selected_menus(event)
+      selected_menu_params[:menus].each do |menu|
+        event.selected_menus.create!(menu_id: menu[:id], price: menu[:price])
+      end
+    end
+
+    def update_selected_menus(event)
+      event.selected_menus.destroy_all
+      selected_menu_params[:menus].each do |menu|
+        event.selected_menus.create!(menu_id: menu[:id], price: menu[:price])
+      end
+    end
 end

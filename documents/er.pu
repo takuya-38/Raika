@@ -8,7 +8,6 @@ entity "events" as events {
     * <<FK>> age_group_id : integer
     * <<u>> google_calendar_id    : integer
     * gender  : integer
-    * total_price : integer
     created_at      : date
     updated_at      : date
 }
@@ -26,6 +25,7 @@ entity "selected_menus" as selected_menus {
     --
     * <<FK>> menu_id : integer
     * <<FK>> event_id : integer
+    * price : integer
     created_at      : date
     updated_at      : date
 }
