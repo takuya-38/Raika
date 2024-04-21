@@ -3,8 +3,8 @@
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "editor.codeActionsOnSave": {
-    "source.addMissingImports": "explicit",
-    "source.fixAll.eslint": "explicit"
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
   },
   "javascript.preferences.importModuleSpecifier": "non-relative",
   "eslint.validate": [
@@ -13,5 +13,11 @@
     "javascriptreact",
     "typescript",
     "typescriptreact"
+  ],
+  "eslint.rules.customizations": [
+    {
+      "rule": "no-unused-vars",
+      "severity": "off"
+    }
   ]
 }
