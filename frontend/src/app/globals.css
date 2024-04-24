@@ -27,8 +27,8 @@ dd {
 }
 
 /* リストのスタイルを削除、これはデフォルトのスタイルが削除されることを示唆します */
-ul[role="list"],
-ol[role="list"] {
+ul,
+ol {
   list-style: none;
 }
 
