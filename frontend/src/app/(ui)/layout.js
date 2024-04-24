@@ -1,11 +1,11 @@
-import Sidebar from '@/app/components/layouts/sidebar/Sidebar'
+import Sidebar from '@/app/components/layouts/Sidebar/Sidebar'
 
 export default function UiLayout({ children }) {
   return (
     <div>
       <div className="body">
         <Sidebar />
-        {children}
+        <main className="main">{children}</main>
       </div>
     </div>
   )

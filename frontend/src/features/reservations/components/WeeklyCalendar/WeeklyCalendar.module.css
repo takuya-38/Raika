@@ -1,0 +1,8 @@
+.calendarContainer {
+  height: 220%;
+  max-height: 1535px;
+  min-height: 1440px;
+  width: 100%;
+  display: flex;
+  overflow-y: hidden;
+}

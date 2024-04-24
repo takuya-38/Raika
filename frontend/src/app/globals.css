@@ -97,6 +97,6 @@ textarea:not([rows]) {
 .main {
   flex: 1;
   height: 100%;
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
   transition: margin-left 0.3s ease-in-out;
 }
