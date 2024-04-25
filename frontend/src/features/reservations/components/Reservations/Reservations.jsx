@@ -1,7 +1,11 @@
 'use client'
 import dayjs from 'dayjs'
 import styles from './Reservations.module.css'
-import { TIME_LIST, HOUR_LIST, WEEKDAYS_LIST } from '../../constants/time'
+import { TIME_LIST } from '../../constants/time'
+import CalendarHeader from '@/features/reservations/components/CalendarHeader/CalendarHeader'
+import CalendarDate from '@/features/reservations/components/CalendarDate/CalendarDate'
+import TimeSlots from '@/features/reservations/components/TimeSlots/TimeSlots'
+import CalendarEvents from '@/features/reservations/components/CalendarEvents/CalendarEvents'
 
 export const Reservations = () => {
   const weekStartDayOffset = 0
@@ -17,56 +21,12 @@ export const Reservations = () => {
       return dayFormat.format('YYYY-MM-DD')
     })
 
-  const EmptyCell = (date) => {
-    return (
-      <>
-        {HOUR_LIST.map((hourList, index) => {
-          return (
-            <div
-              key={hourList.hour}
-              onClick={() => {
-                console.log(date.date, `${hourList.time}`)
-              }}
-              className={styles.empty}
-            />
-          )
-        })}
-      </>
-    )
-  }
-
   return (
     <div className={styles.calendarContainer}>
-      <div className={styles.calendarHeader}>
-        <p>2024 4月</p>
-      </div>
-      <div className={styles.calendarDate}>
-        {dayList.map((dayItem, index) => {
-          return (
-            <div
-              key={`weekdays-${dayItem.date}`}
-              style={{ gridColumn: index + 1 }}
-            >
-              {WEEKDAYS_LIST[index]} {dayItem.split('-')[2]}
-            </div>
-          )
-        })}
-      </div>
+      <CalendarHeader />
+      <CalendarDate dayList={dayList} />
       <div className={styles.calendarMain}>
-        <div className={styles.timeslotsWrapper}>
-          <ul className={styles.timeslotList}>
-            {TIME_LIST.map((timeItem) => {
-              return (
-                <li
-                  key={`timeslot-${timeItem.id}`}
-                  className={styles.timeslotItem}
-                >
-                  {timeItem.time}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+        <TimeSlots />
         <div className={styles.calendarWrapper}>
           <div className={styles.horizontalHeightContainer}>
             {TIME_LIST.map((timeItem) => (
@@ -75,19 +35,7 @@ export const Reservations = () => {
               </div>
             ))}
           </div>
-          <div className={styles.eventContainer}>
-            {dayList.map((dayItem, index) => {
-              return (
-                <div
-                  key={`calendarColumn-${dayItem.date}`}
-                  style={{ gridColumn: index + 1 }}
-                  className={styles.calendarColumn}
-                >
-                  <EmptyCell date={dayItem} />
-                </div>
-              )
-            })}
-          </div>
+          <CalendarEvents dayList={dayList} />
         </div>
       </div>
     </div>
