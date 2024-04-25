@@ -29,15 +29,14 @@
   height: 100%;
   padding-left: 70px;
   text-align: center;
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 1px solid #f0f0f0;
 }
 
 .timeslotsWrapper {
   display: flex;
+  width: auto;
   height: 100%;
-  overflow-y: hidden;
-  padding-top: 60px;
-  border-right: 1px solid #e6e6e6;
+  padding-top: 50px;
 }
 
 .timeslotList {
@@ -52,16 +51,15 @@
   height: 60px;
   text-align: right;
   padding-right: 5px;
+  color: #999999;
 }
 
 /* ----------------------------------- */
 
 .calendarWrapper {
-  /* display: flex; */
   position: relative;
   height: 100%;
   width: 100%;
-  overflow-y: hidden;
 }
 
 .horizontalHeightContainer {
@@ -69,7 +67,7 @@
   flex-direction: column;
   position: absolute;
   z-index: 1;
-  padding-top: 68px;
+  padding-top: 60px;
   height: 100%;
   width: 100%;
 }
@@ -79,7 +77,7 @@
 }
 .horizontalHeight::after {
   content: "";
-  border-top: 1px solid #e6e6e6;
+  border-top: 1px solid #f0f0f0;
   position: absolute;
   width: 100%;
   margin-top: 1px;
@@ -87,31 +85,34 @@
   pointer-events: none;
 }
 
+/* ----------------------------------- */
+
 .eventContainer {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  width: 100%;
-  /* border-left: 1px solid #e6e6e6; */
-  /* border-right: 1px solid #e6e6e6; */
+  border-left: 1px solid #f0f0f0;
 }
 
 .calendarColumn {
-  border-right: 1px solid #e6e6e6;
-  width: 100%;
+  position: relative;
+  z-index: 1;
   height: 100%;
   min-height: 1440px;
-  overflow-y: hidden;
-  z-index: 1;
-  position: relative;
+  border-right: 1px solid #f0f0f0;
 }
 
+/* ----------------------------------- */
+
 .empty {
-  height: 60px;
+  height: 15px;
   width: 100%;
 }
 .empty:hover {
   cursor: pointer;
   background: rgba(0, 162, 106, 0.04);
+}
+.empty::selection {
+  background-color: rgba(0, 162, 106, 0.04);
 }
 
 .itemBox {
@@ -125,7 +126,7 @@
   margin-left: 2px;
   padding: 3px;
   border-radius: 5px;
-  border: 1px solid #ffffff;
+  border: 1px solid #f0f0f0;
   font-size: 12px;
   min-height: 10px;
 }

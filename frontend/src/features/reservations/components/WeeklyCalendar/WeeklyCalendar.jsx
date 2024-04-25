@@ -25,7 +25,7 @@ export const WeeklyCalendar = () => {
             <div
               key={hourList.hour}
               onClick={() => {
-                console.log(date, `${hourList.hour}時`)
+                console.log(date.date, `${hourList.time}`)
               }}
               className={styles.empty}
             />
@@ -56,14 +56,12 @@ export const WeeklyCalendar = () => {
         <div className={styles.timeslotsWrapper}>
           <ul className={styles.timeslotList}>
             {TIME_LIST.map((timeItem) => {
-              const splitedHour = Number(timeItem.time.split(':')[0])
-              const time = `${splitedHour}:${timeItem.time.split(':')[1]}`
               return (
                 <li
                   key={`timeslot-${timeItem.id}`}
                   className={styles.timeslotItem}
                 >
-                  {time}
+                  {timeItem.time}
                 </li>
               )
             })}
@@ -81,11 +79,11 @@ export const WeeklyCalendar = () => {
             {dayList.map((dayItem, index) => {
               return (
                 <div
-                  key={dayItem.date}
+                  key={`calendarColumn-${dayItem.date}`}
                   style={{ gridColumn: index + 1 }}
                   className={styles.calendarColumn}
                 >
-                  a{/* <EmptyCell date={dayItem.date} /> */}
+                  <EmptyCell date={dayItem} />
                 </div>
               )
             })}
