@@ -1,46 +1,35 @@
-.App {
-  font-family: sans-serif;
-  text-align: center;
-}
-
 .timeslotsContainer {
-  height: 100%;
-  overflow-y: scroll;
   display: flex;
-}
-
-.calendarContainer {
-  height: 256%;
   width: 100%;
-  display: flex;
+  height: 100%;
   overflow-y: hidden;
-  min-width: 1080px;
 }
 
 .timeslotList {
   display: flex;
   flex-direction: column;
+  width: 70px;
   padding: 0;
   margin: 0;
-  width: 70;
-  align-items: flex-end;
 }
 
-.timeslotList > li {
-  min-height: 60px;
+.timeslotItem {
+  height: 60px;
+  text-align: right;
+  padding-right: 5px;
+}
+
+.calendarContainer {
+  display: flex;
+  height: 100%;
+  width: 100%;
 }
 
 .calendarWrapper {
-  min-width: 99.95%;
   display: flex;
   position: relative;
   top: 10px;
-}
-
-.horizontalWrapper {
-  min-width: 100%;
-  flex: none;
-  vertical-align: top;
+  width: 100%;
 }
 
 .horizontalHeight {
@@ -56,12 +45,6 @@
   pointer-events: none;
 }
 
-.timesolotsBorderRight {
-  border-right: 1px solid #e6e6e6;
-  position: relative;
-  top: 2px;
-}
-
 .eventContainer {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -73,7 +56,7 @@
 .calendarColumn {
   border-right: 1px solid #e6e6e6;
   width: 100%;
-  height: 220%;
+  height: 100%;
   min-height: 1440px;
   /* overflow-y: hidden; */
   z-index: 1;
@@ -83,7 +66,6 @@
 .empty {
   height: 60px;
   width: 100%;
-  display: block;
 }
 .empty:hover {
   cursor: pointer;
@@ -91,8 +73,8 @@
 }
 
 .date {
-  position: absolute;
-  top: -16px;
+  /* position: absolute; */
+  /* top: -16px; */
   left: 37%;
 }
 

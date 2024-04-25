@@ -1,5 +1,5 @@
 export const TIME_LIST = [
-  { id: 0, time: '00:00' },
+  // { id: 0, time: '00:00' },
   { id: 1, time: '01:00' },
   { id: 2, time: '02:00' },
   { id: 3, time: '03:00' },
@@ -51,3 +51,5 @@ export const HOUR_LIST = [
   { hour: 22 },
   { hour: 23 },
 ]
+
+export const WEEKDAYS_LIST = ['日', '月', '火', '水', '木', '金', '土']
