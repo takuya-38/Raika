@@ -1,9 +1,9 @@
 'use client'
 import dayjs from 'dayjs'
-import styles from './WeeklyCalendar.module.css'
+import styles from './Reservations.module.css'
 import { TIME_LIST, HOUR_LIST, WEEKDAYS_LIST } from '../../constants/time'
 
-export const WeeklyCalendar = () => {
+export const Reservations = () => {
   const weekStartDayOffset = 0
   const _date = dayjs()
   const _day = _date.day()
@@ -40,7 +40,7 @@ export const WeeklyCalendar = () => {
       <div className={styles.calendarHeader}>
         <p>2024 4月</p>
       </div>
-      <div className={styles.calendarDays}>
+      <div className={styles.calendarDate}>
         {dayList.map((dayItem, index) => {
           return (
             <div
