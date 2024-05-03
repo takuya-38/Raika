@@ -10,17 +10,36 @@ import { useState, useEffect } from 'react'
 
 export const Reservations = () => {
   const weekStartDayOffset = 0
-  const _date = dayjs()
-  const _day = _date.day()
-  const dayList = Array(7)
-    .fill(0)
-    .map((_, idx) => {
-      const day = weekStartDayOffset + idx
-      const dayFormat = dayjs(
-        _date.date(_date.date() - _day + weekStartDayOffset + idx),
-      )
-      return dayFormat.format('YYYY-MM-DD')
-    })
+  const [currentDate, setCurrentDate] = useState(dayjs())
+  const [dayList, setDayList] = useState([])
+
+  useEffect(() => {
+    const updateDayList = () => {
+      const _day = currentDate.day()
+      const newDayList = Array(7)
+        .fill(0)
+        .map((_, idx) => {
+          const day = weekStartDayOffset + idx
+          const dayFormat = dayjs(
+            currentDate.date(
+              currentDate.date() - _day + weekStartDayOffset + idx,
+            ),
+          )
+          return dayFormat.format('YYYY-MM-DD')
+        })
+      setDayList(newDayList)
+    }
+
+    updateDayList()
+  }, [currentDate])
+
+  const handleNextWeekClick = () => {
+    setCurrentDate(currentDate.add(7, 'day'))
+  }
+
+  const handlePreviousWeekClick = () => {
+    setCurrentDate(currentDate.subtract(7, 'day'))
+  }
 
   // 初期ロード
   const [events, setEvents] = useState([])
@@ -41,8 +60,12 @@ export const Reservations = () => {
         console.log(post)
         return <div>{post.start_date}</div>
       })} */}
-      <CalendarHeader />
-      <CalendarDate dayList={dayList} />
+      <CalendarHeader
+        dayList={dayList}
+        onNextWeekClick={handleNextWeekClick}
+        onPreviousWeekClick={handlePreviousWeekClick}
+      />
+      {/* <CalendarDate dayList={dayList} /> */}
       <div className={styles.calendarMain}>
         <TimeSlots />
         <div className={styles.calendarWrapper}>
