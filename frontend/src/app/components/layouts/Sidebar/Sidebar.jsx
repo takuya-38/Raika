@@ -12,11 +12,11 @@ const Sidebar = () => {
 
   return (
     <div className={`${styles.side} ${!isOpen && styles.sideClosed}`}>
-      <div className={styles.toggleContainer}>
+      {/* <div className={styles.toggleContainer}>
         <Link className={styles.toggleBtn} href="#" onClick={toggleSidebar}>
           ■
         </Link>
-      </div>
+      </div> */}
 
       <div className={styles.sideWrapper}>
         <div className={styles.menuContainer}>

@@ -13,11 +13,15 @@ const CalendarHeader = ({ dayList, onNextWeekClick, onPreviousWeekClick }) => {
   return (
     <div className={styles.calendarHeader}>
       <div className={styles.calendarNav}>
-        <p>
+        <div className={styles.headerDate}>
           {year} {month}月
-        </p>
-        <button onClick={onPreviousWeekClick}>Previous Week</button>
-        <button onClick={onNextWeekClick}>Next Week</button>
+        </div>
+        <div onClick={onPreviousWeekClick} className={styles.buttonIcon}>
+          {'<'}
+        </div>
+        <div onClick={onNextWeekClick} className={styles.buttonIcon}>
+          {'>'}
+        </div>
       </div>
 
       <div className={styles.calendarDate}>
