@@ -120,8 +120,10 @@
   background: rgba(0, 162, 106, 0.04);
 }
 
-.itemBox {
+.eventBox {
   position: absolute;
+  width: 100%;
+  background-color: aqua;
   cursor: pointer;
 }
 .item {

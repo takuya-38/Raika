@@ -65,7 +65,6 @@ export const Reservations = () => {
         onNextWeekClick={handleNextWeekClick}
         onPreviousWeekClick={handlePreviousWeekClick}
       />
-      {/* <CalendarDate dayList={dayList} /> */}
       <div className={styles.calendarMain}>
         <TimeSlots />
         <div className={styles.calendarWrapper}>
