@@ -27,8 +27,8 @@ dd {
 }
 
 /* リストのスタイルを削除、これはデフォルトのスタイルが削除されることを示唆します */
-ul[role="list"],
-ol[role="list"] {
+ul,
+ol {
   list-style: none;
 }
 
@@ -97,6 +97,6 @@ textarea:not([rows]) {
 .main {
   flex: 1;
   height: 100%;
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
   transition: margin-left 0.3s ease-in-out;
 }

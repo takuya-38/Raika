@@ -9,7 +9,19 @@ class GoogleCalendarController < ApplicationController
       time_max: time_max
     )
 
-    render json: events.items, status: :ok
+    formatted_events = events.items.map do |event|
+      {
+        id: event.id,
+        start_date: event.start.date_time.strftime("%Y-%m-%d"),
+        start_time: event.start.date_time.strftime("%H:%M"),
+        end_date: event.end.date_time.strftime("%Y-%m-%d"),
+        end_time: event.end.date_time.strftime("%H:%M"),
+        summary: event.summary,
+        description: event.description
+      }
+    end
+
+    render json: formatted_events, status: :ok
   end
 
   def create

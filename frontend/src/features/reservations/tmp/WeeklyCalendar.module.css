@@ -1,0 +1,131 @@
+.calendarContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.calendarHeader {
+  display: flex;
+  width: 100%;
+  height: auto;
+  margin-top: 30px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.calendarMain {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.weekdaysWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.timeSlotsWrapper {
+}
+
+.timeslotsContainer {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.timeslotList {
+  display: flex;
+  flex-direction: column;
+  width: 70px;
+  padding: 0;
+  margin: 0;
+}
+
+.timeslotsSpace {
+  height: 60px;
+}
+
+.timeslotItem {
+  height: 60px;
+  text-align: right;
+  padding-right: 5px;
+}
+
+.calendarContainer {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+.calendarWrapper {
+  display: flex;
+  position: relative;
+  top: 10px;
+  width: 100%;
+}
+
+.horizontalHeight {
+  height: 60px;
+}
+.horizontalHeight::after {
+  content: "";
+  border-top: 1px solid #e6e6e6;
+  position: absolute;
+  width: 100%;
+  margin-top: 1px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.eventContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  /* grid-template-rows: repeat(36, 1fr); */
+  width: 100%;
+  border: 1px solid #e6e6e6;
+}
+
+.calendarColumn {
+  border-right: 1px solid #e6e6e6;
+  width: 100%;
+  height: 100%;
+  min-height: 1440px;
+  /* overflow-y: hidden; */
+  z-index: 1;
+  position: relative;
+}
+
+.empty {
+  height: 60px;
+  width: 100%;
+}
+.empty:hover {
+  cursor: pointer;
+  background: rgba(0, 162, 106, 0.04);
+}
+
+.date {
+  /* position: absolute; */
+  /* top: -16px; */
+  left: 37%;
+}
+
+.itemBox {
+  position: absolute;
+  cursor: pointer;
+}
+.item {
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  margin-left: 2px;
+  padding: 3px;
+  border-radius: 5px;
+  border: 1px solid #ffffff;
+  font-size: 12px;
+  min-height: 10px;
+}
