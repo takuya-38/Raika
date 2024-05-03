@@ -44,7 +44,10 @@ const CalendarEvents = ({ dayList, events }) => {
                   style={{ top, height }}
                   className={styles.eventBox}
                 >
-                  {event.summary}
+                  <h1>{event.summary}</h1>
+                  <p>
+                    {event.start_time}-{event.end_time}
+                  </p>
                 </div>
               )
             })}

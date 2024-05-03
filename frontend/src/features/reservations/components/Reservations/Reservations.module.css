@@ -106,6 +106,7 @@
   height: 100%;
   min-height: 1440px;
   border-right: 1px solid #f0f0f0;
+  cursor: pointer;
 }
 
 /* ----------------------------------- */
@@ -123,9 +124,26 @@
 .eventBox {
   position: absolute;
   width: 100%;
-  background-color: aqua;
+  padding: 2px 0 0 5px;
+  background-color: rgb(222, 250, 255);
+  border-radius: 5px;
+  border-left: 6px solid rgb(191, 228, 255);
   cursor: pointer;
+  overflow-y: hidden;
 }
+.eventBox h1 {
+  margin-bottom: 2px;
+  font-size: 14px;
+  color: rgb(145, 173, 198);
+}
+.eventBox p {
+  font-size: 12px;
+  color: rgb(174, 195, 214);
+}
+.eventBox:hover {
+  opacity: 0.75;
+}
+
 .item {
   position: relative;
   overflow-y: hidden;
