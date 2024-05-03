@@ -6,6 +6,7 @@ import CalendarHeader from '@/features/reservations/components/CalendarHeader/Ca
 import CalendarDate from '@/features/reservations/components/CalendarDate/CalendarDate'
 import TimeSlots from '@/features/reservations/components/TimeSlots/TimeSlots'
 import CalendarEvents from '@/features/reservations/components/CalendarEvents/CalendarEvents'
+import { useState, useEffect } from 'react'
 
 export const Reservations = () => {
   const weekStartDayOffset = 0
@@ -21,8 +22,25 @@ export const Reservations = () => {
       return dayFormat.format('YYYY-MM-DD')
     })
 
+  // 初期ロード
+  const [events, setEvents] = useState([])
+  useEffect(() => {
+    const fetchTop = async () => {
+      const res = await fetch('http://localhost:3001/google_calendar')
+      const data = await res.json()
+      setEvents(data)
+    }
+
+    fetchTop()
+  }, [])
+
   return (
     <div className={styles.calendarContainer}>
+      {/* イベント作成仮
+      {posts.map((post) => {
+        console.log(post)
+        return <div>{post.start_date}</div>
+      })} */}
       <CalendarHeader />
       <CalendarDate dayList={dayList} />
       <div className={styles.calendarMain}>
@@ -35,7 +53,7 @@ export const Reservations = () => {
               </div>
             ))}
           </div>
-          <CalendarEvents dayList={dayList} />
+          <CalendarEvents dayList={dayList} events={events} />
         </div>
       </div>
     </div>
