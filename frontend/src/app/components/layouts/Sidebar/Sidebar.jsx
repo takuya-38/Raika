@@ -2,8 +2,14 @@
 import { useState } from 'react'
 import styles from './Sidebar.module.css'
 import Link from 'next/link'
+import { useRecoilValue } from 'recoil'
+import { eventsAtom } from '@/app/components/store/events'
+import dayjs from 'dayjs'
 
 const Sidebar = () => {
+  const events = useRecoilValue(eventsAtom)
+  const today = dayjs().format('YYYY-MM-DD')
+
   const [isOpen, setIsOpen] = useState(true)
 
   const toggleSidebar = () => {
@@ -67,7 +73,34 @@ const Sidebar = () => {
 
         <div className={styles.todayScheduleContainer}>
           <p>本日の予定</p>
-          <div className={styles.eventItem}>
+          {events
+            .filter((event) => event.start_date === today)
+            .map((event) => {
+              return (
+                <div key={event.id} className={styles.eventItem}>
+                  <div className={styles.eventIcon}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="1.5em"
+                      height="1.5em"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h14q.2 0 .375.038t.35.112L17.875 5H5v14h14v-6.65l2-2V19q0 .825-.587 1.413T19 21zm6.525-4l-5.65-5.65l1.4-1.4l4.25 4.25L20.7 5.025L22.125 6.4z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <div className={styles.eventText}>
+                    <div>
+                      {event.start_time}-{event.end_time}
+                    </div>
+                    <div>{event.summary}</div>
+                  </div>
+                </div>
+              )
+            })}
+          {/* <div className={styles.eventItem}>
             <div className={styles.eventIcon}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +118,7 @@ const Sidebar = () => {
               <div>09:00-10:00</div>
               <div>加藤さん</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
