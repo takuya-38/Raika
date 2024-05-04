@@ -22,7 +22,7 @@
   z-index: 100;
   display: flex;
   flex-direction: column;
-  height: 100px;
+  min-height: 100px;
   width: calc(100% - 210px); /* 開閉時変更 */
   padding-right: 500px; /* 開閉時変更 */
   background-color: #ffffff;
@@ -30,17 +30,14 @@
 
 .calendarNav {
   display: flex;
-  align-items: flex-end;
+  flex: 1;
+  align-items: center;
   width: 100%;
-  height: 72px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  vertical-align: bottom;
+  margin-top: 20px;
 }
 
 .headerDate {
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 25px;
   padding-left: 20px;
 }
 

@@ -1,14 +1,29 @@
-import React from 'react'
-import styles from '../Reservations/Reservations.module.css'
-import { WEEKDAYS_LIST } from '../../constants/time'
+import Image from 'next/image'
+import dayjs from 'dayjs'
+import { WEEKDAYS_LIST } from '@/features/reservations/constants/time'
+import styles from '@/features/reservations/components/Reservations/Reservations.module.css'
 
-const CalendarHeader = ({ dayList, onNextWeekClick, onPreviousWeekClick }) => {
-  if (dayList.length === 0) {
-    return <div className={styles.calendarHeader}></div>
+const renderHeaderNav = (icon, text, handleClick) => (
+  <div className={styles.buttonIcon} onClick={handleClick}>
+    <Image src={icon} alt={text} width={24} height={24} />
+  </div>
+)
+
+const getYearAndMonth = (dateString) => {
+  const date = dayjs(dateString)
+  return {
+    year: date.year(),
+    month: date.month() + 1,
   }
+}
 
-  const year = dayList[0].split('-')[0]
-  const month = dayList[0].split('-')[1]
+const CalendarHeader = ({
+  dayList,
+  onNextWeekClick,
+  onPreviousWeekClick,
+  onTodayWeekClick,
+}) => {
+  const { year, month } = getYearAndMonth(dayList[0])
 
   return (
     <div className={styles.calendarHeader}>
@@ -16,12 +31,17 @@ const CalendarHeader = ({ dayList, onNextWeekClick, onPreviousWeekClick }) => {
         <div className={styles.headerDate}>
           {year} {month}月
         </div>
-        <div onClick={onPreviousWeekClick} className={styles.buttonIcon}>
-          {'<'}
-        </div>
-        <div onClick={onNextWeekClick} className={styles.buttonIcon}>
-          {'>'}
-        </div>
+        {renderHeaderNav(
+          '/icons/chevronLeft.svg',
+          'chevronLeft',
+          onPreviousWeekClick,
+        )}
+        {renderHeaderNav(
+          '/icons/chevronRight.svg',
+          'chevronRight',
+          onNextWeekClick,
+        )}
+        {renderHeaderNav('/icons/turn.svg', 'turn', onTodayWeekClick)}
       </div>
 
       <div className={styles.calendarDate}>
