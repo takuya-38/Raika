@@ -8,6 +8,7 @@ import CalendarEvents from '@/features/reservations/components/CalendarEvents/Ca
 import { useState, useEffect } from 'react'
 import { useRecoilValue } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
+import Registrations from '@/features/registrations/components/Registrations/Registrations'
 
 export const Reservations = () => {
   const weekStartDayOffset = 0
@@ -44,25 +45,28 @@ export const Reservations = () => {
   }
 
   return (
-    <div className={styles.calendarContainer}>
-      <CalendarHeader
-        dayList={dayList}
-        onNextWeekClick={handleNextWeekClick}
-        onPreviousWeekClick={handlePreviousWeekClick}
-      />
-      <div className={styles.calendarMain}>
-        <TimeSlots />
-        <div className={styles.calendarWrapper}>
-          <div className={styles.horizontalHeightContainer}>
-            {TIME_LIST.map((timeItem) => (
-              <div key={`horizontal-${timeItem.id}`}>
-                <div className={styles.horizontalHeight} />
-              </div>
-            ))}
+    <div className={styles.reservationsWrapper}>
+      <div className={styles.calendarContainer}>
+        <CalendarHeader
+          dayList={dayList}
+          onNextWeekClick={handleNextWeekClick}
+          onPreviousWeekClick={handlePreviousWeekClick}
+        />
+        <div className={styles.calendarMain}>
+          <TimeSlots />
+          <div className={styles.calendarWrapper}>
+            <div className={styles.horizontalHeightContainer}>
+              {TIME_LIST.map((timeItem) => (
+                <div key={`horizontal-${timeItem.id}`}>
+                  <div className={styles.horizontalHeight} />
+                </div>
+              ))}
+            </div>
+            <CalendarEvents dayList={dayList} events={events} />
           </div>
-          <CalendarEvents dayList={dayList} events={events} />
         </div>
       </div>
+      <Registrations />
     </div>
   )
 }
