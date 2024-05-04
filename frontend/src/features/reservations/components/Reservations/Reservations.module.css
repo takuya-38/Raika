@@ -152,6 +152,10 @@
   background: rgba(0, 162, 106, 0.04);
 }
 
+.selected {
+  background-color: #e6f5fe;
+}
+
 .eventBox {
   position: absolute;
   width: 100%;

@@ -26,6 +26,14 @@ const EmptyCell = ({ date }) => {
   const handleDragEnd = () => {
     setIsDragging(false)
     console.log(selectedRange)
+    console.log(date)
+  }
+
+  // 選択された範囲内にあるかどうかを判定する関数
+  const isSelected = (time) => {
+    if (!selectedRange) return false
+    const { start, end } = selectedRange
+    return time >= start && time <= end
   }
 
   return (
@@ -36,7 +44,7 @@ const EmptyCell = ({ date }) => {
           onMouseDown={() => handleDragStart(hourList.time)}
           onMouseEnter={() => handleDragEnter(hourList.time)}
           onMouseUp={handleDragEnd}
-          className={styles.empty}
+          className={`${styles.empty} ${isSelected(hourList.time) && isDragging ? styles.selected : ''}`}
         />
       ))}
     </>

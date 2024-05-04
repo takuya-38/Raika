@@ -3,8 +3,35 @@
   top: 0;
   right: 0;
   z-index: 300;
+
+  display: flex;
   flex: 1;
-  min-width: 500px;
+
+  width: 500px;
   height: 100vh;
   background-color: antiquewhite;
+}
+
+.reservationWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.inputBox {
+  display: flex;
+}
+
+.inputLabel {
+  width: 100px;
+}
+
+.inputText {
+}
+
+/* 売上登録 */
+
+.salesWrapper {
+  display: flex;
+  flex-direction: column;
 }
