@@ -5,7 +5,7 @@
   width: 210px;
   padding: 0 8px;
   background-color: hsl(0, 0%, 97%);
-  border-color: #f0f0f0;
+  border-right: 4px solid #f0f0f0;
   transition: margin-left 0.3s ease-in-out;
 }
 
@@ -24,18 +24,59 @@
   left: 8px;
 }
 
+.serviceTitle {
+  padding: 27px 0;
+  font-size: 30px;
+  text-align: center;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+/* ナビゲーション */
+
 .menuContainer {
-  margin-bottom: 50px;
+  padding: 10px 0;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .menu {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  padding: 0 10px;
+  border-radius: 5px;
+}
+.menu:hover {
+  background-color: #e5e5e5;
 }
 
-.todaySchedule {
+.menuText {
+  flex: 1;
+  padding-left: 8px;
+  height: 100%;
 }
 
-.eventContainer {
+/* 本日の予定 */
+.todayScheduleContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 10px;
+}
+.todayScheduleContainer p {
+  margin-bottom: 15px;
+  text-align: center;
 }
 
-.event {
+.eventItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.eventText {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-left: 8px;
 }
