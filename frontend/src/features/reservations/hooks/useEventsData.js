@@ -1,11 +1,9 @@
-// hooks/useInitialData.js
 'use client'
-
 import { useEffect } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
 
-export const useInitialData = () => {
+export const useEventsData = () => {
   const setEvents = useSetRecoilState(eventsAtom)
 
   useEffect(() => {

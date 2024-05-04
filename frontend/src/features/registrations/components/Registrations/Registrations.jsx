@@ -2,7 +2,6 @@ import { React, FormEventHandler } from 'react'
 import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { reservationDataAtom } from '@/app/components/store/reservationData'
-import { useInitialData } from '@/app/components/hooks/useInitialData'
 import { eventsAtom } from '@/app/components/store/events'
 
 const Registrations = () => {
