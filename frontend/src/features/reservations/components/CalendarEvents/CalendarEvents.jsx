@@ -1,11 +1,14 @@
+'use client'
 import React, { useEffect } from 'react'
 import styles from '../Reservations/Reservations.module.css'
 import EmptyCell from '@/features/reservations/components/EmptyCell/EmptyCell'
 import { useRecoilValue } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
+import { useInitialData } from '@/app/components/hooks/useInitialData'
 
 const CalendarEvents = ({ dayList }) => {
   const events = useRecoilValue(eventsAtom)
+  useInitialData()
 
   useEffect(() => {
     // eventsAtomの変更を監視し、再レンダリングをトリガーする

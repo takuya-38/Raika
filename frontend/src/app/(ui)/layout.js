@@ -1,23 +1,15 @@
-'use client'
-import { RecoilRoot } from 'recoil'
-import { useInitialData } from '@/app/components/hooks/useInitialData'
 import Sidebar from '@/app/components/layouts/Sidebar/Sidebar'
+import RecoilProvider from '@/app/(ui)/recoilProvider'
 
 export default function UiLayout({ children }) {
   return (
     <div>
       <div className="body">
-        <RecoilRoot>
-          <InitialDataLoader />
+        <RecoilProvider>
           <Sidebar />
           <main className="main">{children}</main>
-        </RecoilRoot>
+        </RecoilProvider>
       </div>
     </div>
   )
-}
-
-function InitialDataLoader() {
-  useInitialData()
-  return null
 }
