@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '../Reservations/Reservations.module.css'
 import EmptyCell from '@/features/reservations/components/EmptyCell/EmptyCell'
+import { useRecoilValue } from 'recoil'
+import { eventsAtom } from '@/app/components/store/events'
 
-const CalendarEvents = ({ dayList, events }) => {
+const CalendarEvents = ({ dayList }) => {
+  const events = useRecoilValue(eventsAtom)
+
+  useEffect(() => {
+    // eventsAtomの変更を監視し、再レンダリングをトリガーする
+    console.log('Events updated:', events)
+  }, [events])
+
   const calculateEventPosition = (startTime, endTime) => {
     const startMinutes = getMinutesFromTimeString(startTime)
     const endMinutes = getMinutesFromTimeString(endTime)

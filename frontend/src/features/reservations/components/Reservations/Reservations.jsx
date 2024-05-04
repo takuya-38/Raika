@@ -18,7 +18,7 @@ export const Reservations = () => {
 
   useEffect(() => {
     const updateDayList = () => {
-      const _day = currentDate.day()
+      const _day = currentDate.day() //曜日
       const newDayList = Array(7)
         .fill(0)
         .map((_, idx) => {
@@ -62,7 +62,7 @@ export const Reservations = () => {
                 </div>
               ))}
             </div>
-            <CalendarEvents dayList={dayList} events={events} />
+            <CalendarEvents dayList={dayList} />
           </div>
         </div>
       </div>

@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import styles from '../Reservations/Reservations.module.css'
 import { HOUR_LIST } from '../../constants/time'
+import { useSetRecoilState } from 'recoil'
+import { reservationDataAtom } from '@/app/components/store/reservationData'
 
 const EmptyCell = ({ date }) => {
   const [selectedRange, setSelectedRange] = useState(null)
   const [isDragging, setIsDragging] = useState(false)
+  const setReservationData = useSetRecoilState(reservationDataAtom)
 
   // ドラッグ開始のハンドラ
   const handleDragStart = (time) => {
@@ -24,6 +27,12 @@ const EmptyCell = ({ date }) => {
 
   // ドラッグ終了のハンドラ
   const handleDragEnd = () => {
+    setReservationData((prevData) => ({
+      ...prevData,
+      date: date,
+      start_time: selectedRange.start,
+      end_time: selectedRange.end,
+    }))
     setIsDragging(false)
     console.log(selectedRange)
     console.log(date)
