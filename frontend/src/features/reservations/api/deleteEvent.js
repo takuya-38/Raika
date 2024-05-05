@@ -1,13 +1,9 @@
-export const updateEvent = async (eventData, id) => {
+export const deleteEvent = async (id) => {
   try {
     const response = await fetch(
       `http://localhost:3001/google_calendar/${id}`,
       {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(eventData),
+        method: 'DELETE',
       },
     )
 

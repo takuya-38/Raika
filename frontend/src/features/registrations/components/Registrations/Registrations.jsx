@@ -5,6 +5,7 @@ import { fetchEvents } from '@/features/reservations/api/fetchEvents'
 import { createEvent } from '@/features/reservations/api/createEvent'
 import { updateEvent } from '@/features/reservations/api/updateEvent'
 import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
+import { deleteEvent } from '@/features/reservations/api/deleteEvent'
 
 const InputField = ({ label, type = 'text', name, defaultValue }) => (
   <div className={styles.inputBox}>
@@ -36,11 +37,20 @@ const Registrations = () => {
       end_: `${date}T${getField('end_time')}:00+09:00`,
     }
 
-    const id = getField('id')
-    const action = id ? updateEvent : createEvent
+    const action = reservationData.id ? updateEvent : createEvent
 
     try {
-      await action(formDataObject, id)
+      await action(formDataObject, reservationData.id)
+      const events = await fetchEvents()
+      setEvents(events)
+    } catch (error) {
+      console.error('Error processing registration:', error)
+    }
+  }
+
+  const handleDeleteClick = async () => {
+    try {
+      await deleteEvent(reservationData.id)
       const events = await fetchEvents()
       setEvents(events)
     } catch (error) {
@@ -80,7 +90,10 @@ const Registrations = () => {
               defaultValue={reservationData?.description}
             />
           </div>
-          <input type="submit" value="予約登録" />
+          <div className={styles.btn} onClick={handleDeleteClick}>
+            削除
+          </div>
+          <input type="submit" value="登録" />
         </form>
       </div>
       <div className={styles.salesWrapper}></div>

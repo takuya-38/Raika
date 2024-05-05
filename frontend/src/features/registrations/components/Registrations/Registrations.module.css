@@ -26,7 +26,8 @@
   width: 100px;
 }
 
-.inputText {
+.btn {
+  cursor: pointer;
 }
 
 /* 売上登録 */
