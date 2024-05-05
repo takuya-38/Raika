@@ -8,7 +8,10 @@ import TimeSlots from '@/features/reservations/components/TimeSlots/TimeSlots'
 import CalendarEvents from '@/features/reservations/components/CalendarEvents/CalendarEvents'
 import Registrations from '@/features/registrations/components/Registrations/Registrations'
 import styles from '@/features/reservations/components/Reservations/Reservations.module.css'
-import { useEventsData } from '@/features/reservations/hooks/useEventsData'
+
+import { useSetRecoilState } from 'recoil'
+import { eventsAtom } from '@/app/components/store/events'
+import { fetchEvents } from '@/features/reservations/api/fetchEvents'
 
 const WEEK_START_DAY_OFFSET = 0
 
@@ -24,11 +27,21 @@ const handleTodayWeekClick = (setCurrentDate) => {
   setCurrentDate(dayjs())
 }
 
+const updateEventsData = async () => {
+  const setEvents = useSetRecoilState(eventsAtom)
+  try {
+    const data = await fetchEvents()
+    setEvents(data)
+  } catch (error) {
+    console.error('Error fetching events:', error)
+  }
+}
+
 export const Reservations = () => {
   const [currentDate, setCurrentDate] = useState(dayjs())
   const dayList = useDayList(currentDate, WEEK_START_DAY_OFFSET)
 
-  useEventsData()
+  updateEventsData()
   console.log('useEventsData実行')
 
   return (

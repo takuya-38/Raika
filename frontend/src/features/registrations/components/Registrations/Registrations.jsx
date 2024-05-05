@@ -1,8 +1,8 @@
-import { React, FormEventHandler } from 'react'
-import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { reservationDataAtom } from '@/app/components/store/reservationData'
 import { eventsAtom } from '@/app/components/store/events'
+import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
+import { fetchEvents } from '@/features/reservations/api/fetchEvents'
 
 const Registrations = () => {
   const reservationData = useRecoilValue(reservationDataAtom)
@@ -37,30 +37,10 @@ const Registrations = () => {
         body: JSON.stringify(eventData),
       })
 
-      // const events = await fetchEvents()
-      // setEvents(events)
-
-      alert('作成完了')
-      // console.log(JSON.stringify(eventData))
+      const events = await fetchEvents()
+      setEvents(events)
     } catch (error) {
       console.error('Error fetching events:', error)
-    }
-  }
-
-  const fetchEvents = async () => {
-    try {
-      const res = await fetch('http://localhost:3001/google_calendar', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-
-      const data = await res.json()
-      return data
-    } catch (error) {
-      console.error('Error fetching events:', error)
-      return []
     }
   }
 
