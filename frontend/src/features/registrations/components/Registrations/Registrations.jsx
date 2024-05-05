@@ -37,8 +37,8 @@ const Registrations = () => {
         body: JSON.stringify(eventData),
       })
 
-      const events = await fetchEvents()
-      setEvents(events)
+      // const events = await fetchEvents()
+      // setEvents(events)
 
       alert('作成完了')
       // console.log(JSON.stringify(eventData))

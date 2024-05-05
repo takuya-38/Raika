@@ -1,13 +1,13 @@
 'use client'
 import { useRecoilValue } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
-import { useEventsData } from '@/features/reservations/hooks/useEventsData'
 import EmptyCell from '@/features/reservations/components/EmptyCell/EmptyCell'
 import styles from '@/features/reservations/components/Reservations/Reservations.module.css'
 
 const CalendarEvents = ({ dayList }) => {
   const events = useRecoilValue(eventsAtom)
-  useEventsData()
+
+  console.log('CalendarEvents実行')
 
   const calculateEventPosition = (event) => {
     const startMinutes = getMinutesFromTimeString(event.start_time)

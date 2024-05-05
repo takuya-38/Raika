@@ -8,6 +8,7 @@ import TimeSlots from '@/features/reservations/components/TimeSlots/TimeSlots'
 import CalendarEvents from '@/features/reservations/components/CalendarEvents/CalendarEvents'
 import Registrations from '@/features/registrations/components/Registrations/Registrations'
 import styles from '@/features/reservations/components/Reservations/Reservations.module.css'
+import { useEventsData } from '@/features/reservations/hooks/useEventsData'
 
 const WEEK_START_DAY_OFFSET = 0
 
@@ -26,6 +27,9 @@ const handleTodayWeekClick = (setCurrentDate) => {
 export const Reservations = () => {
   const [currentDate, setCurrentDate] = useState(dayjs())
   const dayList = useDayList(currentDate, WEEK_START_DAY_OFFSET)
+
+  useEventsData()
+  console.log('useEventsData実行')
 
   return (
     <div className={styles.reservationsWrapper}>

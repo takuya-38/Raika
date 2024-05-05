@@ -37,6 +37,8 @@ const Sidebar = () => {
     [events, today],
   )
 
+  console.log('サイドバー実行')
+
   return (
     <div className={styles.side}>
       <div className={styles.sideWrapper}>
