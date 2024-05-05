@@ -1,46 +1,50 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil'
-import { reservationDataAtom } from '@/app/components/store/reservationData'
 import { eventsAtom } from '@/app/components/store/events'
-import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
+import { reservationDataAtom } from '@/app/components/store/reservationData'
 import { fetchEvents } from '@/features/reservations/api/fetchEvents'
+import { createEvent } from '@/features/reservations/api/createEvent'
+import { updateEvent } from '@/features/reservations/api/updateEvent'
+import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
+
+const InputField = ({ label, type = 'text', name, defaultValue }) => (
+  <div className={styles.inputBox}>
+    <label className={styles.inputLabel} htmlFor={name}>
+      {label}
+    </label>
+    <input
+      className={styles.inputText}
+      type={type}
+      name={name}
+      defaultValue={defaultValue}
+    />
+  </div>
+)
 
 const Registrations = () => {
   const reservationData = useRecoilValue(reservationDataAtom)
   const setEvents = useSetRecoilState(eventsAtom)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    const form = new FormData(event.currentTarget)
-    const summary = form.get('summary') || ''
-    const date = form.get('date') || ''
-    const start_time = form.get('start_time') || ''
-    const end_time = form.get('end_time') || ''
-    const description = form.get('description') || ''
-
+    const formData = new FormData(event.currentTarget)
+    const getField = (name) => formData.get(name) || ''
+    const date = getField('date')
     const formDataObject = {
-      summary: summary,
-      description: description,
-      start: `${date}T${start_time}:00+09:00`,
-      end_: `${date}T${end_time}:00+09:00`,
+      summary: getField('summary'),
+      description: getField('description'),
+      start: `${date}T${getField('start_time')}:00+09:00`,
+      end_: `${date}T${getField('end_time')}:00+09:00`,
     }
 
-    createEvent(formDataObject)
-  }
+    const id = getField('id')
+    const action = id ? updateEvent : createEvent
 
-  const createEvent = async (eventData) => {
     try {
-      const res = await fetch('http://localhost:3001/google_calendar', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(eventData),
-      })
-
+      await action(formDataObject, id)
       const events = await fetchEvents()
       setEvents(events)
     } catch (error) {
-      console.error('Error fetching events:', error)
+      console.error('Error processing registration:', error)
     }
   }
 
@@ -49,39 +53,26 @@ const Registrations = () => {
       <div className={styles.reservationWrapper}>
         <p>予約</p>
         <form onSubmit={handleSubmit}>
-          <div className={styles.inputBox}>
-            <label className={styles.inputLabel} htmlFor="summary">
-              タイトル
-            </label>
-            <input
-              className={styles.inputText}
-              type="text"
-              name="summary"
-              defaultValue={reservationData?.summary}
-            />
-          </div>
-
-          <div className={styles.inputBox}>
-            <label htmlFor="date">日時</label>
-            <input
-              type="text"
-              name="date"
-              defaultValue={reservationData?.date}
-            />
-            <p> - </p>
-            <input
-              type="text"
-              name="start_time"
-              defaultValue={reservationData?.start_time}
-            />
-            <p> - </p>
-            <input
-              type="text"
-              name="end_time"
-              defaultValue={reservationData?.end_time}
-            />
-          </div>
-
+          <InputField
+            label="タイトル"
+            name="summary"
+            defaultValue={reservationData?.summary}
+          />
+          <InputField
+            label="日時"
+            name="date"
+            defaultValue={reservationData?.date}
+          />
+          <p> - </p>
+          <InputField
+            name="start_time"
+            defaultValue={reservationData?.start_time}
+          />
+          <p> - </p>
+          <InputField
+            name="end_time"
+            defaultValue={reservationData?.end_time}
+          />
           <div className={styles.inputBox}>
             <label htmlFor="description">メモ</label>
             <textarea

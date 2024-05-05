@@ -1,13 +1,27 @@
 'use client'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
 import EmptyCell from '@/features/reservations/components/EmptyCell/EmptyCell'
 import styles from '@/features/reservations/components/Reservations/Reservations.module.css'
+import { reservationDataAtom } from '@/app/components/store/reservationData'
 
 const CalendarEvents = ({ dayList }) => {
   const events = useRecoilValue(eventsAtom)
+  const setReservationData = useSetRecoilState(reservationDataAtom)
 
   console.log('CalendarEvents実行')
+
+  const handleClickReservation = (event) => {
+    setReservationData((prevData) => ({
+      ...prevData,
+      id: event.id,
+      summary: event.summary,
+      description: event.description,
+      date: event.start_date,
+      start_time: event.start_time,
+      end_time: event.end_time,
+    }))
+  }
 
   const calculateEventPosition = (event) => {
     const startMinutes = getMinutesFromTimeString(event.start_time)
@@ -29,6 +43,7 @@ const CalendarEvents = ({ dayList }) => {
         key={`event_${event.id}`}
         className={styles.eventBox}
         style={{ top, height }}
+        onClick={() => handleClickReservation(event)}
       >
         <h1>{event.summary}</h1>
         <p>
