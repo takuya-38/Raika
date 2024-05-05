@@ -7,6 +7,7 @@ import { updateEvent } from '@/features/reservations/api/updateEvent'
 import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
 import { deleteEvent } from '@/features/reservations/api/deleteEvent'
 import { menusAtom } from '@/app/components/store/menus'
+import RadioBtn from '@/features/registrations/components/RadioBtn/RadioBtn'
 
 const InputField = ({ label, type = 'text', name, defaultValue }) => (
   <div className={styles.inputBox}>
@@ -25,7 +26,6 @@ const InputField = ({ label, type = 'text', name, defaultValue }) => (
 const Registrations = () => {
   const reservationData = useRecoilValue(reservationDataAtom)
   const menus = useRecoilValue(menusAtom)
-  console.log(menus)
   const setEvents = useSetRecoilState(eventsAtom)
 
   const handleSubmit = async (event) => {
@@ -49,6 +49,14 @@ const Registrations = () => {
     } catch (error) {
       console.error('Error processing registration:', error)
     }
+  }
+
+  const handleSalesSubmit = (event) => {
+    event.preventDefault()
+    const formData = new FormData(event.currentTarget)
+    const getField = (name) => formData.get(name) || ''
+    console.log(getField('gender'))
+    console.log(getField('age'))
   }
 
   const handleDeleteClick = async () => {
@@ -96,13 +104,27 @@ const Registrations = () => {
           <div className={styles.btn} onClick={handleDeleteClick}>
             削除
           </div>
-          <input type="submit" value="登録" />
+          <input type="submit" value="予約登録" />
         </form>
       </div>
       <div className={styles.salesWrapper}>
-        {menus.map((menu) => (
-          <div>{menu.name}</div>
-        ))}
+        <p>予約</p>
+        <form onSubmit={handleSalesSubmit}>
+          <RadioBtn itemCategory="gender" itemNames={['男性', '女性']} />
+          <RadioBtn
+            itemCategory="age"
+            itemNames={[
+              '10歳未満',
+              '10代',
+              '20代',
+              '30代',
+              '40代',
+              '50代',
+              '60歳以上',
+            ]}
+          />
+          <input type="submit" value="売上登録" />
+        </form>
       </div>
     </div>
   )
