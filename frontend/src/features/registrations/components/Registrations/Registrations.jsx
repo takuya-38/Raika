@@ -6,6 +6,7 @@ import { createEvent } from '@/features/reservations/api/createEvent'
 import { updateEvent } from '@/features/reservations/api/updateEvent'
 import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
 import { deleteEvent } from '@/features/reservations/api/deleteEvent'
+import { menusAtom } from '@/app/components/store/menus'
 
 const InputField = ({ label, type = 'text', name, defaultValue }) => (
   <div className={styles.inputBox}>
@@ -23,6 +24,8 @@ const InputField = ({ label, type = 'text', name, defaultValue }) => (
 
 const Registrations = () => {
   const reservationData = useRecoilValue(reservationDataAtom)
+  const menus = useRecoilValue(menusAtom)
+  console.log(menus)
   const setEvents = useSetRecoilState(eventsAtom)
 
   const handleSubmit = async (event) => {
@@ -96,7 +99,11 @@ const Registrations = () => {
           <input type="submit" value="登録" />
         </form>
       </div>
-      <div className={styles.salesWrapper}></div>
+      <div className={styles.salesWrapper}>
+        {menus.map((menu) => (
+          <div>{menu.name}</div>
+        ))}
+      </div>
     </div>
   )
 }

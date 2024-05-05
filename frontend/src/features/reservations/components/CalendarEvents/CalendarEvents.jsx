@@ -9,6 +9,7 @@ const CalendarEvents = ({ dayList }) => {
   const events = useRecoilValue(eventsAtom)
   const setReservationData = useSetRecoilState(reservationDataAtom)
 
+  console.log(events)
   console.log('CalendarEvents実行')
 
   const handleClickReservation = (event) => {

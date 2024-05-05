@@ -12,6 +12,7 @@ import styles from '@/features/reservations/components/Reservations/Reservations
 import { useSetRecoilState } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
 import { fetchEvents } from '@/features/reservations/api/fetchEvents'
+import { useMenusData } from '@/features/reservations/hooks/useMenus'
 
 const WEEK_START_DAY_OFFSET = 0
 
@@ -42,6 +43,7 @@ export const Reservations = () => {
   const dayList = useDayList(currentDate, WEEK_START_DAY_OFFSET)
 
   updateEventsData()
+  useMenusData()
   console.log('useEventsData実行')
 
   return (
