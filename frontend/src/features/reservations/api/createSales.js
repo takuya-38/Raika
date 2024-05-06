@@ -10,6 +10,8 @@ export const createSales = async (eventData) => {
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
+    } else {
+      console.log(JSON.stringify(eventData))
     }
   } catch (error) {
     console.error('Error fetching events:', error)

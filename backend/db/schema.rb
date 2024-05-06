@@ -12,23 +12,23 @@
 
 ActiveRecord::Schema[7.1].define(version: 2024_04_13_003437) do
   create_table "age_groups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "events", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "age_group_id", null: false
-    t.integer "google_calendar_id"
-    t.integer "gender"
+    t.string "google_calendar_id", null: false
+    t.integer "gender", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["age_group_id"], name: "index_events_on_age_group_id"
   end
 
   create_table "menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "name"
-    t.integer "price"
+    t.string "name", null: false
+    t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_003437) do
   create_table "selected_menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "menu_id", null: false
     t.bigint "event_id", null: false
-    t.integer "price"
+    t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_selected_menus_on_event_id"
