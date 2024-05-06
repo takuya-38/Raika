@@ -8,6 +8,13 @@ import styles from '@/features/registrations/components/Registrations/Registrati
 import { deleteEvent } from '@/features/reservations/api/deleteEvent'
 import { menusAtom } from '@/app/components/store/menus'
 import RadioBtn from '@/features/registrations/components/RadioBtn/RadioBtn'
+import SelectBox from '@/features/registrations/components/SelectBox/SelectBox'
+import {
+  AGE_LIST,
+  GENDER_LIST,
+  MENU_LIST,
+} from '@/features/registrations/constants/formItem'
+import { createSales } from '@/features/reservations/api/createSales'
 
 const InputField = ({ label, type = 'text', name, defaultValue }) => (
   <div className={styles.inputBox}>
@@ -55,8 +62,31 @@ const Registrations = () => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
     const getField = (name) => formData.get(name) || ''
-    console.log(getField('gender'))
-    console.log(getField('age'))
+
+    const age_group = AGE_LIST.find((item) => item.category == getField('age'))
+    const gender = GENDER_LIST.find(
+      (item) => item.category == getField('gender'),
+    )
+    const menu = MENU_LIST.find(
+      (item) => item.category == getField('menus[name]'),
+    )
+
+    const formDataObject = {
+      event: {
+        age_group_id: age_group.id,
+        google_calendar_id: reservationData.id,
+        gender: gender.id,
+        menus: [
+          {
+            id: menu.id,
+            price: getField('menu_price'),
+          },
+        ],
+      },
+    }
+
+    createSales(formDataObject)
+    console.log(formDataObject)
   }
 
   const handleDeleteClick = async () => {
@@ -123,6 +153,7 @@ const Registrations = () => {
               '60歳以上',
             ]}
           />
+          <SelectBox itemCategory="menus" items={menus} />
           <input type="submit" value="売上登録" />
         </form>
       </div>
