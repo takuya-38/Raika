@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
 import { reservationDataAtom } from '@/app/components/store/reservationData'
@@ -16,10 +17,10 @@ import {
 import { createSales } from '@/features/reservations/api/createSales'
 import { useSalesData } from '@/features/registrations/hooks/useSalesData'
 
-const InputField = ({ label, type = 'text', name, defaultValue }) => (
+const InputField = ({ label, icon, type = 'text', name, defaultValue }) => (
   <div className={styles.inputBox}>
     <label className={styles.inputLabel} htmlFor={name}>
-      {label}
+      <Image src={icon} alt={label} width={24} height={24} />
     </label>
     <input
       className={styles.inputText}
@@ -133,46 +134,86 @@ const Registrations = () => {
     ))
   }
 
+  console.log(reservationData)
+
   return (
     <div className={styles.registrationsWrapper}>
       <div className={styles.reservationWrapper}>
-        <p>予約</p>
+        <p className={styles.categoryName}>予約</p>
         <form onSubmit={handleSubmit}>
-          <InputField
-            label="タイトル"
-            name="summary"
-            defaultValue={reservationData?.summary}
-          />
-          <InputField
-            label="日時"
-            name="date"
-            defaultValue={reservationData?.date}
-          />
-          <p> - </p>
-          <InputField
-            name="start_time"
-            defaultValue={reservationData?.start_time}
-          />
-          <p> - </p>
-          <InputField
-            name="end_time"
-            defaultValue={reservationData?.end_time}
-          />
           <div className={styles.inputBox}>
-            <label htmlFor="description">メモ</label>
-            <textarea
-              name="description"
-              defaultValue={reservationData?.description}
+            <label className={styles.inputLabel} htmlFor={'summary'}>
+              <Image
+                src={'/icons/title.svg'}
+                alt={'タイトル'}
+                width={24}
+                height={24}
+              />
+            </label>
+            <input
+              className={`${styles.inputText} ${styles.input}`} // クラス名を追加
+              type={'text'}
+              name={'summary'}
+              defaultValue={reservationData ? reservationData.summary : ''}
+              placeholder="タイトル"
             />
           </div>
-          <div className={styles.btn} onClick={handleDeleteClick}>
-            削除
+          <div className={styles.inputBox}>
+            <label className={styles.inputLabel} htmlFor={'date'}>
+              <Image
+                src={'/icons/clock.svg'}
+                alt={'時間'}
+                width={24}
+                height={24}
+              />
+            </label>
+            <input
+              className={`${styles.inputDate} ${styles.input}`} // クラス名を追加
+              type={'text'}
+              name={'date'}
+              defaultValue={reservationData ? reservationData.date : ''}
+            />
+            <div> </div>
+            <input
+              className={`${styles.inputTime} ${styles.input}`} // クラス名を追加
+              type={'text'}
+              name={'start_time'}
+              defaultValue={reservationData ? reservationData.start_time : ''}
+            />
+            <Image
+              src="/icons/arrowRight.svg"
+              alt="arrowRight"
+              width={24}
+              height={24}
+            />
+            <input
+              className={`${styles.inputTime} ${styles.input}`} // クラス名を追加
+              type={'text'}
+              name={'end_time'}
+              defaultValue={reservationData ? reservationData.end_time : ''}
+            />
           </div>
-          <input type="submit" value="予約登録" />
+          <div className={styles.inputBox}>
+            <label className={styles.inputLabel} htmlFor="description">
+              <Image src="/icons/memo.svg" alt="memo" width={24} height={24} />
+            </label>
+            <textarea
+              name="description"
+              defaultValue={reservationData ? reservationData.description : ''}
+              className={`${styles.textarea} ${styles.input}`}
+              placeholder="メモ"
+            />
+          </div>
+          <div className={styles.btnBox}>
+            <input className={styles.btn} type="submit" value="登録" />
+            <div className={styles.btn} onClick={handleDeleteClick}>
+              削除
+            </div>
+          </div>
         </form>
       </div>
       <div className={styles.salesWrapper}>
-        <p>予約</p>
+        <p className={styles.categoryName}>予約</p>
         <form onSubmit={handleSalesSubmit}>
           <RadioBtn
             itemCategory="gender"

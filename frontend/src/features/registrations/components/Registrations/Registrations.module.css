@@ -10,25 +10,93 @@
 
   width: 500px;
   height: 100vh;
-  background-color: antiquewhite;
+  background-color: #ffffff;
+
+  padding: 72px 0 0 0;
+  border-left: 4px solid #f0f0f0;
 }
 
 .reservationWrapper {
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  padding: 0 20px 20px 15px;
   margin-bottom: 25px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.categoryName {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .inputBox {
   display: flex;
+  width: 100%;
+  padding-left: 15px;
+  margin-bottom: 10px;
+  align-items: center;
 }
 
 .inputLabel {
+  width: auto;
+  height: 100%;
+  margin-right: 20px;
+}
+
+.input {
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.input:hover {
+  border: 2px solid #ededed;
+}
+.input:focus {
+  outline: none;
+  border: 2px solid #ededed;
+  background-color: #ededed;
+}
+
+.inputText {
+  width: 100%;
+}
+
+.inputDate {
   width: 100px;
 }
 
+.inputTime {
+  width: 60px;
+  text-align: center;
+  margin: 0 10px;
+}
+
+.textarea:not([row]) {
+  resize: none;
+  letter-spacing: 1px;
+  width: 100%;
+  min-height: 1.5em;
+  line-height: 1.5;
+  border: 2px solid #ededed;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .btn {
+  display: block;
+  width: 80px;
+  margin-left: 10px;
+
+  text-align: center;
+  background-color: #ffffff;
+  border: 2px solid #ededed;
+  border-radius: 4px;
   cursor: pointer;
 }
 

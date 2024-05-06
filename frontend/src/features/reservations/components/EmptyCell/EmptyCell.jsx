@@ -28,8 +28,10 @@ const EmptyCell = ({ date }) => {
 
   const handleDragEnd = useCallback(() => {
     if (selectedRange) {
-      setReservationData((prevData) => ({
-        ...prevData,
+      setReservationData(() => ({
+        id: '',
+        summary: '',
+        description: '',
         date: date,
         start_time: selectedRange.start,
         end_time: selectedRange.end,
