@@ -172,6 +172,7 @@ const Registrations = () => {
               type={'text'}
               name={'date'}
               defaultValue={reservationData ? reservationData.date : ''}
+              placeholder="日付"
             />
             <div> </div>
             <input
@@ -179,6 +180,7 @@ const Registrations = () => {
               type={'text'}
               name={'start_time'}
               defaultValue={reservationData ? reservationData.start_time : ''}
+              placeholder="00:00"
             />
             <Image
               src="/icons/arrowRight.svg"
@@ -191,6 +193,7 @@ const Registrations = () => {
               type={'text'}
               name={'end_time'}
               defaultValue={reservationData ? reservationData.end_time : ''}
+              placeholder="00:00"
             />
           </div>
           <div className={styles.inputBox}>
@@ -213,7 +216,7 @@ const Registrations = () => {
         </form>
       </div>
       <div className={styles.salesWrapper}>
-        <p className={styles.categoryName}>予約</p>
+        <p className={styles.categoryName}>売上</p>
         <form onSubmit={handleSalesSubmit}>
           <RadioBtn
             itemCategory="gender"
