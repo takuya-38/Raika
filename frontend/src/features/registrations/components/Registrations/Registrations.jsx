@@ -6,7 +6,6 @@ import { createEvent } from '@/features/reservations/api/createEvent'
 import { updateEvent } from '@/features/reservations/api/updateEvent'
 import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
 import { deleteEvent } from '@/features/reservations/api/deleteEvent'
-import { menusAtom } from '@/app/components/store/menus'
 import RadioBtn from '@/features/registrations/components/RadioBtn/RadioBtn'
 import SelectBox from '@/features/registrations/components/SelectBox/SelectBox'
 import {
@@ -15,6 +14,7 @@ import {
   MENU_LIST,
 } from '@/features/registrations/constants/formItem'
 import { createSales } from '@/features/reservations/api/createSales'
+import { useSalesData } from '@/features/registrations/hooks/useSalesData'
 
 const InputField = ({ label, type = 'text', name, defaultValue }) => (
   <div className={styles.inputBox}>
@@ -32,8 +32,9 @@ const InputField = ({ label, type = 'text', name, defaultValue }) => (
 
 const Registrations = () => {
   const reservationData = useRecoilValue(reservationDataAtom)
-  const menus = useRecoilValue(menusAtom)
   const setEvents = useSetRecoilState(eventsAtom)
+
+  const salesData = useSalesData(reservationData.id)
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -67,8 +68,15 @@ const Registrations = () => {
     const gender = GENDER_LIST.find(
       (item) => item.category == getField('gender'),
     )
-    const menu = MENU_LIST.find(
-      (item) => item.category == getField('menus[name]'),
+
+    const menu0 = MENU_LIST.find(
+      (item) => item.name == getField('menus_0[name]'),
+    )
+    const menu1 = MENU_LIST.find(
+      (item) => item.name == getField('menus_1[name]'),
+    )
+    const menu2 = MENU_LIST.find(
+      (item) => item.name == getField('menus_2[name]'),
     )
 
     const formDataObject = {
@@ -78,8 +86,16 @@ const Registrations = () => {
         gender: gender.id,
         menus: [
           {
-            id: menu.id,
-            price: getField('menu_price'),
+            id: menu0.id,
+            price: getField('price_menus_0'),
+          },
+          {
+            id: menu1.id,
+            price: getField('price_menus_1'),
+          },
+          {
+            id: menu2.id,
+            price: getField('price_menus_2'),
           },
         ],
       },
@@ -97,6 +113,24 @@ const Registrations = () => {
     } catch (error) {
       console.error('Error processing registration:', error)
     }
+  }
+
+  const renderSelectBoxes = () => {
+    const emptyMenus = Array(3).fill({
+      menu_id: 0,
+      name: '-----------',
+    })
+
+    const selectedMenus = salesData?.selected_menus || []
+    const mergedMenus = [...selectedMenus, ...emptyMenus].slice(0, 3)
+
+    return mergedMenus.map((selectedMenu, index) => (
+      <SelectBox
+        key={index}
+        itemCategory={`menus_${index}`}
+        selectedData={selectedMenu}
+      />
+    ))
   }
 
   return (
@@ -140,7 +174,13 @@ const Registrations = () => {
       <div className={styles.salesWrapper}>
         <p>予約</p>
         <form onSubmit={handleSalesSubmit}>
-          <RadioBtn itemCategory="gender" itemNames={['男性', '女性']} />
+          <RadioBtn
+            itemCategory="gender"
+            itemNames={['男性', '女性']}
+            selectedData={
+              GENDER_LIST.find((item) => item.id == salesData?.gender)?.category
+            }
+          />
           <RadioBtn
             itemCategory="age"
             itemNames={[
@@ -152,8 +192,12 @@ const Registrations = () => {
               '50代',
               '60歳以上',
             ]}
+            selectedData={
+              AGE_LIST.find((item) => item.id == salesData?.age_group_id)
+                ?.category
+            }
           />
-          <SelectBox itemCategory="menus" items={menus} />
+          {renderSelectBoxes()}
           <input type="submit" value="売上登録" />
         </form>
       </div>

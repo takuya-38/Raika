@@ -1,9 +1,13 @@
 class SalesController < ApplicationController
-  before_action :set_sale, only: [:update, :destroy]
+  before_action :set_sale, only: [:show, :update, :destroy]
 
   def index
     sales = Sale.all
     render json: sales
+  end
+
+  def show
+    render json: @sale, include: :selected_menus
   end
 
   def create
@@ -41,7 +45,7 @@ class SalesController < ApplicationController
 
   private
     def set_sale
-      @sale = Sale.find(params[:id])
+      @sale = Sale.find_by(google_calendar_id: params[:id])
     end
 
     def sale_params

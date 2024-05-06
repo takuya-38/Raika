@@ -1,10 +1,14 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
 
-const RadioBtn = ({ itemCategory, itemNames }) => {
-  const [value, setValue] = useState('startup')
+const RadioBtn = ({ itemCategory, itemNames, selectedData }) => {
+  const [value, setValue] = useState(selectedData)
+
+  useEffect(() => {
+    setValue(selectedData)
+  }, [selectedData])
 
   return (
     <RadioGroup value={value} onChange={setValue} name={itemCategory}>

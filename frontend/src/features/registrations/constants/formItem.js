@@ -15,51 +15,55 @@ export const AGE_LIST = [
 
 export const MENU_LIST = [
   {
+    id: 0,
+    name: '-------------',
+  },
+  {
     id: 1,
-    category: 'カット',
+    name: 'カット',
   },
   {
     id: 2,
-    category: '前髪カット',
+    name: '前髪カット',
   },
   {
     id: 3,
-    category: 'ポイントカット',
+    name: 'ポイントカット',
   },
   {
     id: 4,
-    category: 'リタッチ',
+    name: 'リタッチ',
   },
   {
     id: 5,
-    category: 'グレーカラー',
+    name: 'グレーカラー',
   },
   {
     id: 6,
-    category: 'ファッションカラー',
+    name: 'ファッションカラー',
   },
   {
     id: 7,
-    category: 'ベーシックパーマ',
+    name: 'ベーシックパーマ',
   },
   {
     id: 8,
-    category: 'ポイントパーマ',
+    name: 'ポイントパーマ',
   },
   {
     id: 9,
-    category: 'ストレートパーマ',
+    name: 'ストレートパーマ',
   },
   {
     id: 10,
-    category: 'ポイントストレート',
+    name: 'ポイントストレート',
   },
   {
     id: 11,
-    category: 'シャンプブロー',
+    name: 'シャンプブロー',
   },
   {
     id: 12,
-    category: 'シェービング',
+    name: 'シェービング',
   },
 ]
