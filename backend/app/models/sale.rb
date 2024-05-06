@@ -1,4 +1,4 @@
-class Event < ApplicationRecord
+class Sale < ApplicationRecord
   belongs_to :age_group
 
   has_many :selected_menus, dependent: :destroy

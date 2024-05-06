@@ -2,7 +2,7 @@
 hide circle
 skinparam linetype ortho
 
-entity "events" as events {
+entity "sales" as sales {
     * <<PK>> id
     --
     * <<FK>> age_group_id : integer
@@ -40,8 +40,8 @@ entity "menus" as menus {
     updated_at      : date
 }
 
-events }|..|| age_groups
-events ||..|{ selected_menus
+sales }|..|| age_groups
+sales ||..|{ selected_menus
 selected_menus }|..|| menus
 
 @enduml

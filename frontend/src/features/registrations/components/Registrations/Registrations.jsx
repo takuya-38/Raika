@@ -72,7 +72,7 @@ const Registrations = () => {
     )
 
     const formDataObject = {
-      event: {
+      sale: {
         age_group_id: age_group.id,
         google_calendar_id: reservationData.id,
         gender: gender.id,
