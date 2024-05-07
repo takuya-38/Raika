@@ -2,8 +2,9 @@
 import { useEffect, useState } from 'react'
 import { RadioGroup } from '@headlessui/react'
 import styles from '@/features/registrations/components/Registrations/Registrations.module.css'
+import Image from 'next/image'
 
-const RadioBtn = ({ itemCategory, itemNames, selectedData }) => {
+const RadioBtn = ({ itemCategory, src, itemNames, selectedData }) => {
   const [value, setValue] = useState(selectedData)
 
   useEffect(() => {
@@ -11,15 +12,28 @@ const RadioBtn = ({ itemCategory, itemNames, selectedData }) => {
   }, [selectedData])
 
   return (
-    <RadioGroup value={value} onChange={setValue} name={itemCategory}>
-      <RadioGroup.Label>{itemCategory}</RadioGroup.Label>
-      {itemNames.map((itemName) => (
-        <RadioGroup.Option key={itemName} value={itemName}>
-          {({ checked }) => (
-            <span className={checked ? styles.tmp : ''}>{itemName}</span>
-          )}
-        </RadioGroup.Option>
-      ))}
+    <RadioGroup
+      className={styles.radioBtnContainer}
+      value={value}
+      onChange={setValue}
+      name={itemCategory}
+    >
+      <RadioGroup.Label className={styles.inputLabel}>
+        <Image src={src} alt={itemCategory} width={24} height={24} />
+      </RadioGroup.Label>
+      <div className={styles.radioBtnBox}>
+        {itemNames.map((itemName) => (
+          <RadioGroup.Option key={itemName} value={itemName}>
+            {({ checked }) => (
+              <span
+                className={`${checked ? styles.tmp : ''} ${styles.radioBtn} ${styles.input}`}
+              >
+                {itemName}
+              </span>
+            )}
+          </RadioGroup.Option>
+        ))}
+      </div>
     </RadioGroup>
   )
 }

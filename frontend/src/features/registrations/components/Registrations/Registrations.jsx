@@ -123,7 +123,7 @@ const Registrations = () => {
     })
 
     const selectedMenus = salesData?.selected_menus || []
-    const mergedMenus = [...selectedMenus, ...emptyMenus].slice(0, 3)
+    const mergedMenus = [...selectedMenus, ...emptyMenus].slice(0, 1)
 
     return mergedMenus.map((selectedMenu, index) => (
       <SelectBox
@@ -220,6 +220,7 @@ const Registrations = () => {
         <form onSubmit={handleSalesSubmit}>
           <RadioBtn
             itemCategory="gender"
+            src="/icons/gender.svg"
             itemNames={['男性', '女性']}
             selectedData={
               GENDER_LIST.find((item) => item.id == salesData?.gender)?.category
@@ -227,6 +228,7 @@ const Registrations = () => {
           />
           <RadioBtn
             itemCategory="age"
+            src="/icons/cake.svg"
             itemNames={[
               '10歳未満',
               '10代',
@@ -241,6 +243,7 @@ const Registrations = () => {
                 ?.category
             }
           />
+          <p className={styles.subCategoryName}>メニュー</p>
           {renderSelectBoxes()}
           <input type="submit" value="売上登録" />
         </form>

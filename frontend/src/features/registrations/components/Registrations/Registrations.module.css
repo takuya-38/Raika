@@ -12,7 +12,7 @@
   height: 100vh;
   background-color: #ffffff;
 
-  padding: 72px 0 0 0;
+  padding: 32px 0 0 0;
   border-left: 4px solid #f0f0f0;
 }
 
@@ -50,6 +50,7 @@
   border: 2px solid transparent;
   border-radius: 4px;
   cursor: pointer;
+  transition: all 0.2s 0s ease;
 }
 .input:hover {
   border: 2px solid #ededed;
@@ -98,6 +99,10 @@
   border: 2px solid #ededed;
   border-radius: 4px;
   cursor: pointer;
+
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* 売上登録 */
@@ -111,6 +116,173 @@
   border-bottom: 2px solid #f0f0f0;
 }
 
+.radioBtnContainer {
+  display: flex;
+  width: 100%;
+  padding-left: 15px;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.radioBtnBox {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px 10px;
+  width: 100%;
+  /* padding: 12px; */
+}
+
+.radioBtn {
+  display: block;
+  border: 2px solid #ededed;
+  width: 100%;
+  padding: 5px 10px;
+  text-align: center;
+  transition: all 0.2s 0s ease;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
 .tmp {
-  background-color: blue;
+  background-color: #ededed;
+}
+
+.subCategoryName {
+  padding-left: 15px;
+  margin-bottom: 5px;
+}
+
+.selectBoxContainer {
+  /* display: flex; */
+  width: 100%;
+  padding-left: 15px;
+  margin-bottom: 15px;
+  align-items: center;
+
+  position: relative; /* 消す */
+  margin-top: 4px; /* 消す */
+}
+
+.selectBox {
+  margin-right: 10px;
+}
+
+/* ーーーーーーーーーーーーーーーーーーーーーーーー */
+
+.listboxButton {
+  position: relative;
+  width: 200px;
+  cursor: default;
+  border: 2px solid #ededed;
+  border-radius: 4px;
+  background-color: white;
+  padding: 8px 12px;
+  padding-right: 40px;
+  margin-right: 20px;
+  text-align: left;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  outline: none;
+}
+
+/* .listboxButton:focus {
+  border-color: #6366f1;
+  box-shadow:
+    0 0 0 2px rgba(255, 255, 255, 0.75),
+    0 0 0 4px #f59e0b;
+} */
+
+.listboxButtonText {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.listboxButtonIcon {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding-right: 8px;
+}
+
+.listboxButtonIconSvg {
+  height: 20px;
+  width: 20px;
+  color: #9ca3af;
+}
+
+.transitionLeave {
+  transition: opacity 0.1s ease-in;
+}
+
+.transitionLeaveFrom {
+  opacity: 1;
+}
+
+.transitionLeaveTo {
+  opacity: 0;
+}
+
+.listboxOptions {
+  position: absolute;
+  margin-top: 4px;
+  max-height: 120px;
+  width: 200px;
+  overflow: auto;
+  border-radius: 6px;
+  background-color: white;
+  padding: 4px 0;
+  text-align: left;
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  outline: none;
+  font-size: 14px;
+}
+
+.listboxOption {
+  position: relative;
+  cursor: default;
+  user-select: none;
+  padding: 8px 40px 8px 40px;
+}
+
+.listboxOptionActive {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.listboxOptionText {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.listboxOptionTextSelected {
+  font-weight: 500;
+}
+
+.listboxOptionIcon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  padding-left: 12px;
+  color: #d97706;
+}
+
+.listboxOptionIconSvg {
+  height: 20px;
+  width: 20px;
 }
