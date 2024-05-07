@@ -80,6 +80,10 @@ select {
   font: inherit;
 }
 
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px white inset;
+}
+
 /* rows属性のないtextareaが小さくならないようにする */
 textarea:not([rows]) {
   min-height: 10em;

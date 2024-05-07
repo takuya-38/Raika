@@ -60,6 +60,52 @@ const Registrations = () => {
     }
   }
 
+  // const handleSalesSubmit = (event) => {
+  //   event.preventDefault()
+  //   const formData = new FormData(event.currentTarget)
+  //   const getField = (name) => formData.get(name) || ''
+
+  //   const age_group = AGE_LIST.find((item) => item.category == getField('age'))
+  //   const gender = GENDER_LIST.find(
+  //     (item) => item.category == getField('gender'),
+  //   )
+
+  //   const menu0 = MENU_LIST.find(
+  //     (item) => item.name == getField('menus_0[name]'),
+  //   )
+  //   const menu1 = MENU_LIST.find(
+  //     (item) => item.name == getField('menus_1[name]'),
+  //   )
+  //   const menu2 = MENU_LIST.find(
+  //     (item) => item.name == getField('menus_2[name]'),
+  //   )
+
+  //   const formDataObject = {
+  //     sale: {
+  //       age_group_id: age_group.id,
+  //       google_calendar_id: reservationData.id,
+  //       gender: gender.id,
+  //       menus: [
+  //         {
+  //           id: menu0.id,
+  //           price: getField('price_menus_0'),
+  //         },
+  //         {
+  //           id: menu1.id,
+  //           price: getField('price_menus_1'),
+  //         },
+  //         {
+  //           id: menu2.id,
+  //           price: getField('price_menus_2'),
+  //         },
+  //       ],
+  //     },
+  //   }
+
+  //   // createSales(formDataObject)
+  //   console.log(formDataObject)
+  // }
+
   const handleSalesSubmit = (event) => {
     event.preventDefault()
     const formData = new FormData(event.currentTarget)
@@ -80,25 +126,33 @@ const Registrations = () => {
       (item) => item.name == getField('menus_2[name]'),
     )
 
+    const menus = [
+      {
+        id: menu0.id,
+        price: getField('price_menus_0'),
+      },
+    ]
+
+    if (menu1) {
+      menus.push({
+        id: menu1.id,
+        price: getField('price_menus_1'),
+      })
+    }
+
+    if (menu2) {
+      menus.push({
+        id: menu2.id,
+        price: getField('price_menus_2'),
+      })
+    }
+
     const formDataObject = {
       sale: {
         age_group_id: age_group.id,
         google_calendar_id: reservationData.id,
         gender: gender.id,
-        menus: [
-          {
-            id: menu0.id,
-            price: getField('price_menus_0'),
-          },
-          {
-            id: menu1.id,
-            price: getField('price_menus_1'),
-          },
-          {
-            id: menu2.id,
-            price: getField('price_menus_2'),
-          },
-        ],
+        menus: menus,
       },
     }
 
@@ -123,7 +177,7 @@ const Registrations = () => {
     })
 
     const selectedMenus = salesData?.selected_menus || []
-    const mergedMenus = [...selectedMenus, ...emptyMenus].slice(0, 1)
+    const mergedMenus = [...selectedMenus, ...emptyMenus].slice(0, 3)
 
     return mergedMenus.map((selectedMenu, index) => (
       <SelectBox
@@ -245,7 +299,10 @@ const Registrations = () => {
           />
           <p className={styles.subCategoryName}>メニュー</p>
           {renderSelectBoxes()}
-          <input type="submit" value="売上登録" />
+          <div className={styles.btnBox}>
+            <input className={styles.btn} type="submit" value="登録" />
+            <div className={styles.btn}>削除</div>
+          </div>
         </form>
       </div>
     </div>

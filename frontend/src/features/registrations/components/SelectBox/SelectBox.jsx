@@ -46,6 +46,7 @@ const SelectBox = ({ itemCategory, selectedData }) => {
           type="text"
           name={`price_${itemCategory}`}
           defaultValue={selectedItem?.price || ''}
+          className={styles.inputPrice}
         />
 
         <Transition

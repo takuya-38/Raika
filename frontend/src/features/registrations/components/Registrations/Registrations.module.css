@@ -157,7 +157,7 @@
 .selectBoxContainer {
   /* display: flex; */
   width: 100%;
-  padding-left: 15px;
+  padding-left: 58px;
   margin-bottom: 15px;
   align-items: center;
 
@@ -165,8 +165,9 @@
   margin-top: 4px; /* 消す */
 }
 
-.selectBox {
-  margin-right: 10px;
+.inputPrice {
+  width: 130px;
+  border: 2px solid #ededed;
 }
 
 /* ーーーーーーーーーーーーーーーーーーーーーーーー */
@@ -187,13 +188,6 @@
     0 2px 4px -1px rgba(0, 0, 0, 0.06);
   outline: none;
 }
-
-/* .listboxButton:focus {
-  border-color: #6366f1;
-  box-shadow:
-    0 0 0 2px rgba(255, 255, 255, 0.75),
-    0 0 0 4px #f59e0b;
-} */
 
 .listboxButtonText {
   display: block;
@@ -233,6 +227,7 @@
 
 .listboxOptions {
   position: absolute;
+  z-index: 30;
   margin-top: 4px;
   max-height: 120px;
   width: 200px;
