@@ -1,68 +1,80 @@
 'use client'
+import { useState } from 'react'
 import dayjs from 'dayjs'
-import styles from './Reservations.module.css'
-import { TIME_LIST } from '../../constants/time'
+import { TIME_LIST } from '@/features/reservations/constants/time'
+import { useDayList } from '@/features/reservations/hooks/useDayList'
 import CalendarHeader from '@/features/reservations/components/CalendarHeader/CalendarHeader'
 import TimeSlots from '@/features/reservations/components/TimeSlots/TimeSlots'
 import CalendarEvents from '@/features/reservations/components/CalendarEvents/CalendarEvents'
-import { useState, useEffect } from 'react'
-import { useRecoilValue } from 'recoil'
+import Registrations from '@/features/registrations/components/Registrations/Registrations'
+import styles from '@/features/reservations/components/Reservations/Reservations.module.css'
+
+import { useSetRecoilState } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
+import { fetchEvents } from '@/features/reservations/api/fetchEvents'
+import { useMenusData } from '@/features/reservations/hooks/useMenus'
+
+const WEEK_START_DAY_OFFSET = 0
+
+const handleNextWeekClick = (currentDate, setCurrentDate) => {
+  setCurrentDate(currentDate.add(7, 'day'))
+}
+
+const handlePreviousWeekClick = (currentDate, setCurrentDate) => {
+  setCurrentDate(currentDate.subtract(7, 'day'))
+}
+
+const handleTodayWeekClick = (setCurrentDate) => {
+  setCurrentDate(dayjs())
+}
+
+const updateEventsData = async () => {
+  const setEvents = useSetRecoilState(eventsAtom)
+  try {
+    const data = await fetchEvents()
+    setEvents(data)
+  } catch (error) {
+    console.error('Error fetching events:', error)
+  }
+}
 
 export const Reservations = () => {
-  const weekStartDayOffset = 0
   const [currentDate, setCurrentDate] = useState(dayjs())
-  const [dayList, setDayList] = useState([])
-  const events = useRecoilValue(eventsAtom)
+  const dayList = useDayList(currentDate, WEEK_START_DAY_OFFSET)
 
-  useEffect(() => {
-    const updateDayList = () => {
-      const _day = currentDate.day()
-      const newDayList = Array(7)
-        .fill(0)
-        .map((_, idx) => {
-          const day = weekStartDayOffset + idx
-          const dayFormat = dayjs(
-            currentDate.date(
-              currentDate.date() - _day + weekStartDayOffset + idx,
-            ),
-          )
-          return dayFormat.format('YYYY-MM-DD')
-        })
-      setDayList(newDayList)
-    }
-
-    updateDayList()
-  }, [currentDate])
-
-  const handleNextWeekClick = () => {
-    setCurrentDate(currentDate.add(7, 'day'))
-  }
-
-  const handlePreviousWeekClick = () => {
-    setCurrentDate(currentDate.subtract(7, 'day'))
-  }
+  updateEventsData()
+  useMenusData()
+  console.log('useEventsData実行')
 
   return (
-    <div className={styles.calendarContainer}>
-      <CalendarHeader
-        dayList={dayList}
-        onNextWeekClick={handleNextWeekClick}
-        onPreviousWeekClick={handlePreviousWeekClick}
-      />
-      <div className={styles.calendarMain}>
-        <TimeSlots />
-        <div className={styles.calendarWrapper}>
-          <div className={styles.horizontalHeightContainer}>
-            {TIME_LIST.map((timeItem) => (
-              <div key={`horizontal-${timeItem.id}`}>
-                <div className={styles.horizontalHeight} />
-              </div>
-            ))}
+    <div className={styles.reservationsWrapper}>
+      <div className={styles.calendarContainer}>
+        <CalendarHeader
+          currentDate={currentDate}
+          dayList={dayList}
+          onNextWeekClick={() =>
+            handleNextWeekClick(currentDate, setCurrentDate)
+          }
+          onPreviousWeekClick={() =>
+            handlePreviousWeekClick(currentDate, setCurrentDate)
+          }
+          onTodayWeekClick={() => handleTodayWeekClick(setCurrentDate)}
+        />
+        <div className={styles.calendarMain}>
+          <TimeSlots />
+          <div className={styles.calendarWrapper}>
+            <div className={styles.horizontalHeightContainer}>
+              {TIME_LIST.map((timeItem) => (
+                <div key={`horizontal-${timeItem.id}`}>
+                  <div className={styles.horizontalHeight} />
+                </div>
+              ))}
+            </div>
+            <CalendarEvents dayList={dayList} />
           </div>
-          <CalendarEvents dayList={dayList} events={events} />
         </div>
       </div>
+      <Registrations />
     </div>
   )
 }

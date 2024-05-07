@@ -3,6 +3,7 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  font-family: system-ui;
 }
 
 /* フォントサイズの拡大を防ぐ */
@@ -77,6 +78,10 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px white inset;
 }
 
 /* rows属性のないtextareaが小さくならないようにする */

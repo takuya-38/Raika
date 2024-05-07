@@ -1,23 +1,23 @@
 require "test_helper"
 
-class EventsControllerTest < ActionDispatch::IntegrationTest
+class SalesControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get events_index_url
+    get sales_index_url
     assert_response :success
   end
 
   test "should get create" do
-    get events_create_url
+    get sales_create_url
     assert_response :success
   end
 
   test "should get update" do
-    get events_update_url
+    get sales_update_url
     assert_response :success
   end
 
   test "should get destroy" do
-    get events_destroy_url
+    get sales_destroy_url
     assert_response :success
   end
 end

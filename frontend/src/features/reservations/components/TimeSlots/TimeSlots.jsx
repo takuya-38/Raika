@@ -1,6 +1,5 @@
-import React from 'react'
+import { TIME_LIST } from '@/features/reservations/constants/time'
 import styles from '../Reservations/Reservations.module.css'
-import { TIME_LIST } from '../../constants/time'
 
 const TimeSlots = () => {
   return (
