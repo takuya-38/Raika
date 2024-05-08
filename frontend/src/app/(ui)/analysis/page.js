@@ -9,7 +9,7 @@ const Page = () => {
         <div className={styles.analysisWrapper}>
           <div className={styles.dataContainer}>
             <div className={styles.dataContent}>
-              <div className={styles.dataBox}>今月</div>
+              <h1>今月</h1>
               <div className={styles.dataBox}>
                 <div>売上</div>
                 <div>￥ 50,000</div>
@@ -29,7 +29,7 @@ const Page = () => {
                 <div>来店人数</div>
                 <div>6 人</div>
               </div>
-            </div>{' '}
+            </div>
             <div className={styles.dataContent}>
               <div className={styles.dataBox}>先週</div>
               <div className={styles.dataBox}>
@@ -44,6 +44,7 @@ const Page = () => {
           </div>
 
           <div className={styles.graphContainer}>
+            <CardBarChart />
             <CardBarChart />
           </div>
         </div>
