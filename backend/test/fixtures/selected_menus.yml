@@ -2,8 +2,10 @@
 
 one:
   menu_id: 1
-  event_id: 1
+  sale_id: 1
+  price: 5500
 
 two:
   menu_id: 1
-  event_id: 1
+  sale_id: 1
+  price: 5500

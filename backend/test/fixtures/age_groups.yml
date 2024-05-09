@@ -1,7 +1,41 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+under_10:
+  id: 1
+  name: "10歳未満"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
 
-one:
-  name: MyString
+ten_teens:
+  id: 2
+  name: "10代"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
 
-two:
-  name: MyString
+twenties:
+  id: 3
+  name: "20代"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
+
+thirties:
+  id: 4
+  name: "30代"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
+
+fourties:
+  id: 5
+  name: "40代"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
+
+fifties:
+  id: 6
+  name: "50代"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
+
+over_60:
+  id: 7
+  name: "60歳以上"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
