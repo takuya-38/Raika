@@ -52,6 +52,7 @@
   grid-template-rows: repeat(2, 1fr);
   gap: 20px;
   flex: 3;
+  max-height: 700px;
 }
 
 /* ---------------------------------- */
