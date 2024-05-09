@@ -58,7 +58,9 @@ const Sidebar = () => {
         </div>
 
         <div className={styles.todayScheduleContainer}>
-          <p>本日の予定</p>
+          <p>
+            <span>本日の予定</span>
+          </p>
           {todayEvents.length > 0 ? todayEvents.map(renderEvent) : <p></p>}
         </div>
       </div>

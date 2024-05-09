@@ -262,8 +262,15 @@ const Registrations = () => {
             />
           </div>
           <div className={styles.btnBox}>
-            <input className={styles.btn} type="submit" value="登録" />
-            <div className={styles.btn} onClick={handleDeleteClick}>
+            <input
+              className={`${styles.btn} ${styles.registrationBtn} `}
+              type="submit"
+              value="登録"
+            />
+            <div
+              className={`${styles.btn} ${styles.deleteBtn} `}
+              onClick={handleDeleteClick}
+            >
               削除
             </div>
           </div>
@@ -300,8 +307,17 @@ const Registrations = () => {
           <p className={styles.subCategoryName}>メニュー</p>
           {renderSelectBoxes()}
           <div className={styles.btnBox}>
-            <input className={styles.btn} type="submit" value="登録" />
-            <div className={styles.btn}>削除</div>
+            <input
+              className={`${styles.btn} ${styles.registrationBtn} `}
+              type="submit"
+              value="登録"
+            />
+            <div
+              className={`${styles.btn} ${styles.deleteBtn} `}
+              onClick={handleDeleteClick}
+            >
+              削除
+            </div>
           </div>
         </form>
       </div>

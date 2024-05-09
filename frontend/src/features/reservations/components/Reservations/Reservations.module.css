@@ -155,12 +155,13 @@
 .eventBox {
   position: absolute;
   width: 100%;
-  padding: 2px 0 0 5px;
+  padding: 8px 0 0 8px;
   background-color: rgb(222, 250, 255);
   border-radius: 5px;
   border-left: 6px solid rgb(191, 228, 255);
   cursor: pointer;
   overflow-y: hidden;
+  transition: all 0.2s 0s;
 }
 .eventBox h1 {
   margin-bottom: 2px;

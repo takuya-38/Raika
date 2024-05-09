@@ -3,9 +3,8 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   darkMode: ['class'],
   content: [
-    './pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
+    './features/analysis/*.{js,ts,jsx,tsx,mdx}',
+    './app/app/(ui)/analysis/*.{js,ts,jsx,tsx,mdx}',
     './node_modules/@tremor/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
@@ -74,7 +73,7 @@ module.exports = {
       },
       boxShadow: {
         // light
-        'tremor-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+        // 'tremor-input': '0 1px 2px 0 rgb(0 0 0 / 0.05)',
         'tremor-card':
           '0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)',
         'tremor-dropdown':
