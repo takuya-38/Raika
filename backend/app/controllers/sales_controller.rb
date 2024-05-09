@@ -2,8 +2,22 @@ class SalesController < ApplicationController
   before_action :set_sale, only: [:show, :update, :destroy]
 
   def index
-    sales = Sale.all
-    render json: sales
+    # sales = Sale.all
+    # render json: sales, include: :selected_menus
+
+    current_year = Time.current.year
+    sales = Sale.where(created_at: Time.new(current_year, 1, 1)..Time.new(current_year, 12, 31)).includes(:selected_menus)
+
+    formatted_data = (1..12).map do |month|
+      month_sales = sales.select { |sale| sale.created_at.month == month }
+      {
+        date: Date::ABBR_MONTHNAMES[month],
+        来店人数: month_sales.size,
+        総売上: month_sales.sum { |sale| sale.selected_menus.sum(:price) }
+      }
+    end
+
+    render json: [{ year: current_year, data: formatted_data }]
   end
 
   def show

@@ -2,6 +2,8 @@
 import { BarChart, CodeBlock } from '@tremor/react'
 import { useState } from 'react'
 import styles from './CardBarChart.module.css'
+import { useRecoilValue } from 'recoil'
+import { salesAtom } from '@/app/components/store/sales'
 
 const chartdata = [
   {
@@ -54,20 +56,40 @@ const chartdata = [
   },
 ]
 
-const CardBarChart = () => {
+const CardBarChart = (data) => {
   const [value, setValue] = useState(null)
+  const salesData = useRecoilValue(salesAtom)
+
+  const filteredData =
+    data.dataName == '来店人数'
+      ? salesData.map((yearData) => ({
+          year: yearData.year,
+          data: yearData.data.map((monthData) => ({
+            date: monthData.date,
+            来店人数: monthData['来店人数'],
+          })),
+        }))
+      : salesData.map((yearData) => ({
+          year: yearData.year,
+          data: yearData.data.map((monthData) => ({
+            date: monthData.date,
+            総売上: monthData['総売上'],
+          })),
+        }))
+
+  console.log(filteredData[0]?.data)
 
   return (
     <div className={styles.graphContent}>
       <h3 className="text-lg font-medium text-tremor-content-strong dark:text-dark-tremor-content-strong">
-        Closed Pull Requests
+        {filteredData[0]?.year}年 {data.dataName}
       </h3>
       <BarChart
         className="mt-6"
-        data={chartdata}
+        data={filteredData[0]?.data}
         index="date"
-        categories={['2022', '2023']}
-        colors={['gray', 'blue']}
+        categories={[data.dataName]}
+        colors={['blue']}
         yAxisWidth={30}
         onValueChange={(v) => setValue(v)}
       />
