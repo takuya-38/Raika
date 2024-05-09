@@ -44,8 +44,16 @@ const Sidebar = () => {
       <div className={styles.sideWrapper}>
         <div className={styles.serviceTitle}>Raika</div>
         <div className={styles.menuContainer}>
-          {renderMenu('/icons/calendar.svg', 'スケジュール', '#')}
-          {renderMenu('/icons/analytics.svg', '売上分析', '#')}
+          {renderMenu(
+            '/icons/calendar.svg',
+            'スケジュール',
+            'http://localhost:3000/reservations',
+          )}
+          {renderMenu(
+            '/icons/analytics.svg',
+            '売上分析',
+            'http://localhost:3000/analysis',
+          )}
           {renderMenu('/icons/menu.svg', 'メニュー設定', '#')}
         </div>
 
