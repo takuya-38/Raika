@@ -16,6 +16,7 @@ import {
 } from '@/features/registrations/constants/formItem'
 import { createSales } from '@/features/reservations/api/createSales'
 import { useSalesData } from '@/features/registrations/hooks/useSalesData'
+import { useSnackbarContext } from '@/app/components/layouts/SnackbarProvider/SnackbarProvider'
 
 const InputField = ({ label, icon, type = 'text', name, defaultValue }) => (
   <div className={styles.inputBox}>
@@ -32,6 +33,7 @@ const InputField = ({ label, icon, type = 'text', name, defaultValue }) => (
 )
 
 const Registrations = () => {
+  const { showSnackbar } = useSnackbarContext()
   const reservationData = useRecoilValue(reservationDataAtom)
   const setEvents = useSetRecoilState(eventsAtom)
 
@@ -55,56 +57,18 @@ const Registrations = () => {
       await action(formDataObject, reservationData.id)
       const events = await fetchEvents()
       setEvents(events)
+
+      if (showSnackbar) {
+        showSnackbar('success', '予約情報の登録完了しました。')
+      }
     } catch (error) {
       console.error('Error processing registration:', error)
+
+      if (showSnackbar) {
+        showSnackbar('error', error.message)
+      }
     }
   }
-
-  // const handleSalesSubmit = (event) => {
-  //   event.preventDefault()
-  //   const formData = new FormData(event.currentTarget)
-  //   const getField = (name) => formData.get(name) || ''
-
-  //   const age_group = AGE_LIST.find((item) => item.category == getField('age'))
-  //   const gender = GENDER_LIST.find(
-  //     (item) => item.category == getField('gender'),
-  //   )
-
-  //   const menu0 = MENU_LIST.find(
-  //     (item) => item.name == getField('menus_0[name]'),
-  //   )
-  //   const menu1 = MENU_LIST.find(
-  //     (item) => item.name == getField('menus_1[name]'),
-  //   )
-  //   const menu2 = MENU_LIST.find(
-  //     (item) => item.name == getField('menus_2[name]'),
-  //   )
-
-  //   const formDataObject = {
-  //     sale: {
-  //       age_group_id: age_group.id,
-  //       google_calendar_id: reservationData.id,
-  //       gender: gender.id,
-  //       menus: [
-  //         {
-  //           id: menu0.id,
-  //           price: getField('price_menus_0'),
-  //         },
-  //         {
-  //           id: menu1.id,
-  //           price: getField('price_menus_1'),
-  //         },
-  //         {
-  //           id: menu2.id,
-  //           price: getField('price_menus_2'),
-  //         },
-  //       ],
-  //     },
-  //   }
-
-  //   // createSales(formDataObject)
-  //   console.log(formDataObject)
-  // }
 
   const handleSalesSubmit = (event) => {
     event.preventDefault()
@@ -156,8 +120,20 @@ const Registrations = () => {
       },
     }
 
-    createSales(formDataObject)
-    console.log(formDataObject)
+    try {
+      createSales(formDataObject)
+      console.log(formDataObject)
+
+      if (showSnackbar) {
+        showSnackbar('success', '売上情報の登録完了しました。')
+      }
+    } catch (error) {
+      console.error('Error processing registration:', error)
+
+      if (showSnackbar) {
+        showSnackbar('error', error.message)
+      }
+    }
   }
 
   const handleDeleteClick = async () => {
@@ -262,8 +238,15 @@ const Registrations = () => {
             />
           </div>
           <div className={styles.btnBox}>
-            <input className={styles.btn} type="submit" value="登録" />
-            <div className={styles.btn} onClick={handleDeleteClick}>
+            <input
+              className={`${styles.btn} ${styles.registrationBtn} `}
+              type="submit"
+              value="登録"
+            />
+            <div
+              className={`${styles.btn} ${styles.deleteBtn} `}
+              onClick={handleDeleteClick}
+            >
               削除
             </div>
           </div>
@@ -300,8 +283,17 @@ const Registrations = () => {
           <p className={styles.subCategoryName}>メニュー</p>
           {renderSelectBoxes()}
           <div className={styles.btnBox}>
-            <input className={styles.btn} type="submit" value="登録" />
-            <div className={styles.btn}>削除</div>
+            <input
+              className={`${styles.btn} ${styles.registrationBtn} `}
+              type="submit"
+              value="登録"
+            />
+            <div
+              className={`${styles.btn} ${styles.deleteBtn} `}
+              onClick={handleDeleteClick}
+            >
+              削除
+            </div>
           </div>
         </form>
       </div>
