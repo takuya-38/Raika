@@ -1,11 +1,18 @@
+.svg {
+  display: inline;
+  stroke: #9d9cbb;
+  fill: #9d9cbb;
+}
+
 .side {
   position: fixed;
   z-index: 110;
-  height: 100vh;
+  height: 100%;
   width: 210px;
   padding: 0 8px;
-  background-color: hsl(0, 0%, 97%);
-  border-right: 4px solid #f0f0f0;
+  color: #9d9cbb;
+  background-color: #fff;
+  border-right: 1px solid #f0f0f0;
   transition: margin-left 0.3s ease-in-out;
 }
 
@@ -28,14 +35,14 @@
   padding: 27px 0;
   font-size: 30px;
   text-align: center;
-  border-bottom: 2px solid #f0f0f0;
+  /* border-bottom: 2px solid #f0f0f0; */
 }
 
 /* ナビゲーション */
 
 .menuContainer {
   padding: 10px 0;
-  border-bottom: 2px solid #f0f0f0;
+  /* border-bottom: 2px solid #f0f0f0; */
 }
 
 .menu {
@@ -47,7 +54,7 @@
   transition: all 0.2s 0s ease;
 }
 .menu:hover {
-  background-color: #e5e5e5;
+  color: #692dff;
 }
 
 .menuText {

@@ -41,6 +41,7 @@ ol {
 body {
   min-height: 100vh;
   line-height: 1.5;
+  background-color: #f8fbff;
 }
 
 /* 見出しやインタラクティブ要素のline-heightを設定 */
@@ -106,6 +107,21 @@ textarea:not([rows]) {
 .main {
   flex: 1;
   height: 100%;
-  padding-left: 210px;
-  transition: margin-left 0.3s ease-in-out;
+  margin-left: 210px;
+  padding: 40px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pageTitleWrapper {
+  flex-shrink: 0;
+  height: 80px;
+}
+
+.pageTitle {
+  font-size: 35px;
 }

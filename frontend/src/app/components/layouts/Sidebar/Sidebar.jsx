@@ -9,7 +9,13 @@ import styles from './Sidebar.module.css'
 
 const renderMenu = (icon, text, href) => (
   <Link className={styles.menu} href={href}>
-    <Image src={icon} alt={text} width={24} height={24} />
+    <Image
+      className={styles.svg}
+      src={icon}
+      alt={text}
+      width={24}
+      height={24}
+    />
     <p className={styles.menuText}>{text}</p>
   </Link>
 )
@@ -17,7 +23,13 @@ const renderMenu = (icon, text, href) => (
 const renderEvent = (event) => (
   <div key={event.id} className={styles.eventItem}>
     <div className={styles.eventIcon}>
-      <Image src="/icons/check.svg" alt="Check" width={24} height={24} />
+      <Image
+        className={styles.svg}
+        src="/icons/check.svg"
+        alt="Check"
+        width={24}
+        height={24}
+      />
     </div>
     <div className={styles.eventText}>
       <div>
