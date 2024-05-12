@@ -1,35 +1,23 @@
 'use client'
 import { useMemo } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import dayjs from 'dayjs'
 import { useRecoilValue } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
 import styles from './Sidebar.module.css'
-
-const renderMenu = (icon, text, href) => (
-  <Link className={styles.menu} href={href}>
-    <Image
-      className={styles.svg}
-      src={icon}
-      alt={text}
-      width={24}
-      height={24}
-    />
-    <p className={styles.menuText}>{text}</p>
-  </Link>
-)
+import {
+  CalendarIcon,
+  AnalyticsIcon,
+  MenuIcon,
+  CheckIcon,
+} from '@/public/icons/svgIcon'
+import Image from 'next/image'
+import logoImage from '@/public/logo/Raika_logo.png'
 
 const renderEvent = (event) => (
   <div key={event.id} className={styles.eventItem}>
     <div className={styles.eventIcon}>
-      <Image
-        className={styles.svg}
-        src="/icons/check.svg"
-        alt="Check"
-        width={24}
-        height={24}
-      />
+      <CheckIcon />
     </div>
     <div className={styles.eventText}>
       <div>
@@ -54,19 +42,37 @@ const Sidebar = () => {
   return (
     <div className={styles.side}>
       <div className={styles.sideWrapper}>
-        <div className={styles.serviceTitle}>Raika</div>
+        <div className={styles.serviceTitle}>
+          <Image src={logoImage} alt="logo" width="auto" height={30} />
+        </div>
+
         <div className={styles.menuContainer}>
-          {renderMenu(
-            '/icons/calendar.svg',
-            'スケジュール',
-            'http://localhost:3000/reservations',
-          )}
-          {renderMenu(
-            '/icons/analytics.svg',
-            '売上分析',
-            'http://localhost:3000/analysis',
-          )}
-          {renderMenu('/icons/menu.svg', 'メニュー設定', '#')}
+          <div className={styles.menuBox}>
+            <Link
+              className={styles.menu}
+              href={'http://localhost:3000/reservations'}
+            >
+              <CalendarIcon />
+              <p className={styles.menuText}>Calendar</p>
+            </Link>
+            <div className={styles.hoverDesign}></div>
+          </div>
+
+          <div className={styles.menuBox}>
+            <Link className={styles.menu} href="http://localhost:3000/analysis">
+              <AnalyticsIcon />
+              <p className={styles.menuText}>DashBoard</p>
+            </Link>
+            <div className={styles.hoverDesign}></div>
+          </div>
+
+          <div className={styles.menuBox}>
+            <Link className={styles.menu} href="#">
+              <MenuIcon />
+              <p className={styles.menuText}>Setting</p>
+            </Link>
+            <div className={styles.hoverDesign}></div>
+          </div>
         </div>
 
         <div className={styles.todayScheduleContainer}>

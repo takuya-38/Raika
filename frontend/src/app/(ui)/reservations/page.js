@@ -5,9 +5,9 @@ import { Reservations } from '@/features/reservations/components/Reservations/Re
 const page = () => {
   return (
     <div className="container">
-      <div className="pageTitleWrapper">
+      {/* <div className="pageTitleWrapper">
         <span className="pageTitle">Calendar</span>
-      </div>
+      </div> */}
       <Reservations />
     </div>
   )
