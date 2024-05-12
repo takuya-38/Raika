@@ -53,7 +53,7 @@ const Page = () => {
           </div>
         </div>
       </div>
-      <div className={styles.deadSpace}></div>
+      {/* <div className={styles.deadSpace}></div> */}
     </div>
   )
 }

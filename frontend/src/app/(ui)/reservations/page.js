@@ -1,10 +1,13 @@
 import React from 'react'
-import styles from './style.module.css'
+import '@/app/globals.css'
 import { Reservations } from '@/features/reservations/components/Reservations/Reservations'
 
 const page = () => {
   return (
-    <div className={styles.app}>
+    <div className="container">
+      {/* <div className="pageTitleWrapper">
+        <span className="pageTitle">Calendar</span>
+      </div> */}
       <Reservations />
     </div>
   )

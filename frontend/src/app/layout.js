@@ -1,6 +1,8 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { SnackbarProvider } from '@/app/components/layouts/SnackbarProvider/SnackbarProvider'
+import RecoilProvider from '@/app/components/provider/recoilProvider.jsx'
+import Sidebar from '@/app/components/layouts/Sidebar/Sidebar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,9 +14,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="ja">
-      <SnackbarProvider>
-        <body className={inter.className}>{children}</body>
-      </SnackbarProvider>
+      <body className={inter.className}>
+        <SnackbarProvider>
+          <RecoilProvider>
+            <div className="body">
+              <Sidebar />
+              <main className="main">{children}</main>
+            </div>
+          </RecoilProvider>
+        </SnackbarProvider>
+      </body>
     </html>
   )
 }
