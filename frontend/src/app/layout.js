@@ -3,6 +3,7 @@ import './globals.css'
 import { SnackbarProvider } from '@/app/components/layouts/SnackbarProvider/SnackbarProvider'
 import RecoilProvider from '@/app/components/provider/recoilProvider.jsx'
 import Sidebar from '@/app/components/layouts/Sidebar/Sidebar'
+import { AuthProvider } from '@/context/auth'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,10 +18,12 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <SnackbarProvider>
           <RecoilProvider>
-            <div className="body">
-              <Sidebar />
-              <main className="main">{children}</main>
-            </div>
+            <AuthProvider>
+              <div className="body">
+                <Sidebar />
+                <main className="main">{children}</main>
+              </div>
+            </AuthProvider>
           </RecoilProvider>
         </SnackbarProvider>
       </body>
