@@ -5,17 +5,24 @@
 import { useRouter } from 'next/navigation'
 import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
 import { auth } from '@/lib/FirebaseConfig'
-import { fetchEvents } from '@/features/reservations/api/fetchEvents'
+import { useSnackbarContext } from '@/app/components/layouts/SnackbarProvider/SnackbarProvider'
 
 export default function Home() {
   const router = useRouter()
+  const { showSnackbar } = useSnackbarContext()
 
   const googleProvider = new GoogleAuthProvider()
   const handleGoogleSignIn = () => {
     signInWithPopup(auth, googleProvider)
       .then(() => {
-        console.log(fetchEvents())
-        // router.push('/reservations')
+        if (auth.currentUser.email !== process.env.NEXT_PUBLIC_APPLY_MAIL) {
+          auth.currentUser.delete()
+          if (showSnackbar) {
+            showSnackbar('error', '使用不可なアカウントです。')
+          }
+        } else {
+          router.push('/reservations')
+        }
       })
       .catch((err) => console.error(err))
   }
