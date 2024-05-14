@@ -1,35 +1,47 @@
 'use client'
-import { useAuth } from '@/context/auth'
-import { login, logout } from '@/lib/auth'
-import { useState } from 'react'
+// import { useAuth } from '@/context/auth'
+// import { login, logout } from '@/lib/auth'
+// import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth'
+import { auth } from '@/lib/FirebaseConfig'
+import { fetchEvents } from '@/features/reservations/api/fetchEvents'
 
 export default function Home() {
-  const user = useAuth()
-  const [waiting, setWaiting] = useState(false)
   const router = useRouter()
 
-  const signIn = async () => {
-    setWaiting(true)
-
-    try {
-      await login()
-      if (user) {
-        router.push('/reservations')
-      }
-    } catch (error) {
-      console.error(error?.code)
-    } finally {
-      setWaiting(false)
-    }
+  const googleProvider = new GoogleAuthProvider()
+  const handleGoogleSignIn = () => {
+    signInWithPopup(auth, googleProvider)
+      .then(() => {
+        console.log(fetchEvents())
+        // router.push('/reservations')
+      })
+      .catch((err) => console.error(err))
   }
 
-  console.log(user)
+  const handleTest = () => {
+    auth.currentUser
+      .getIdToken(true)
+      .then((idToken) => {
+        return fetch('http://localhost:3001/menus', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + idToken,
+          },
+        })
+      })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.error('Error fetching events:', err))
+  }
 
   return (
-    <div>
-      {user === null && !waiting && <button onClick={signIn}>ログイン</button>}
-      {user && <button onClick={logout}>ログアウト</button>}
-    </div>
+    <>
+      <p>Sign in with Google:</p>
+      <button onClick={handleGoogleSignIn}>Google</button>
+      <button onClick={handleTest}>test</button>
+    </>
   )
 }
