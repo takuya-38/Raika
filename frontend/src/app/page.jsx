@@ -21,6 +21,7 @@ export default function Home() {
             showSnackbar('error', '使用不可なアカウントです。')
           }
         } else {
+          console.log(auth.currentUser.email)
           router.push('/reservations')
         }
       })

@@ -10,7 +10,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_APPID,
 }
 
-if (!getApps()?.length) {
+if (typeof window !== 'undefined' && !getApps()?.length) {
   initializeApp(firebaseConfig)
 }
 
