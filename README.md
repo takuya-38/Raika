@@ -37,6 +37,23 @@ Raika紹介動画：https://www.youtube.com/watch?v=RBFT8fD7ZXA
 
 ## 機能一覧
 
+### ログイン画面
+
+<img width="80%" alt="analysis_page" src="https://github.com/takuya-38/Raika/assets/128199416/89b7d46b-1f0c-4727-99fc-a1ae0004329f">
+
+【機能】
+
+- Googleアカウントでのログイン
+
+<br>
+
+【詳細説明】
+
+- Firebase Authorizationを用いてログイン機能実装
+- 指定したアカウントのみログイン可能
+
+<br>
+
 ### カレンダー画面
 
 <img width="80%" alt="calendar_page" src="https://github.com/takuya-38/Raika/assets/128199416/49a08ced-1a0f-4ee6-b3d3-26e4587e9f0a">
@@ -89,7 +106,13 @@ Raika紹介動画：https://www.youtube.com/watch?v=RBFT8fD7ZXA
 | Category | Technology Stack |
 | --- | --- |
 | Frontend | React / Next.js / Tailwind CSS / eslint&prettier |
-| Backend | Rails / minitst / RuboCop |
+| Backend | Rails / minitest / RuboCop |
 | Database | MySQL |
 | Environment | Docker, Docker compose |
-| etc. | Git, GitHub, Google Calendar API |
+| etc. | Git, GitHub, Firebase Authorization, Google Calendar API |
+
+<br>
+
+## インフラ構成図
+
+<img width="80%" alt="analysis_page" src="https://github.com/takuya-38/Raika/assets/128199416/42fdb051-8c7f-4942-b0c6-df28b25ad17a">

@@ -315,6 +315,7 @@ DEPENDENCIES
   google-api-ruby-client
   google-apis-calendar_v3
   googleauth
+  jwt
   mysql2 (~> 0.5)
   puma (>= 5.0)
   rack-cors
