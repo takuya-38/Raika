@@ -7,6 +7,8 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
 
 import AnalysisHeader from '@/features/analysis/components/AnalysisHeader/AnalysisHeader'
+import Home from '@/features/analysis/components/Home/Home'
+import { useTabContext } from '@/app/components/provider/tabProvider'
 
 const Page = () => {
   const [loading, setLoading] = useState(true)
@@ -31,24 +33,24 @@ const Page = () => {
     return <div></div>
   }
 
-  // const { value } = useTabContext()
+  const { value } = useTabContext()
 
-  // const renderTabContent = (value) => {
-  //   switch (value) {
-  //     case '1':
-  //       return <Welcome />
-  //     case '2':
-  //       return <About />
-  //     case '3':
-  //       return <Articles />
-  //   }
-  // }
+  const renderTabContent = (value) => {
+    switch (value) {
+      case '1':
+        return <Home />
+      case '2':
+        return
+      case '3':
+        return
+    }
+  }
 
   return (
-    <>
+    <div className={styles.container}>
       <AnalysisHeader />
-      {/* {renderTabContent(value)} */}
-    </>
+      <div className={styles.mainWrapper}>{renderTabContent(value)}</div>
+    </div>
   )
 
   // return (

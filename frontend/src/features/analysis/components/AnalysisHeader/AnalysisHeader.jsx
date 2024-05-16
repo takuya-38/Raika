@@ -15,8 +15,8 @@ export default function Header() {
     <Box className={styles.headerBox}>
       <Tabs value={value} onChange={handleChange}>
         <Tab label="Home" value="1" />
-        <Tab label="About" value="2" />
-        <Tab label="Articles" value="3" />
+        <Tab label="Year" value="2" />
+        <Tab label="All" value="3" />
       </Tabs>
     </Box>
   )
