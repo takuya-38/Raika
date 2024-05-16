@@ -1,7 +1,8 @@
 import { Inter } from 'next/font/google'
-import './globals.css'
+import { TabProvider } from '@/app/components/provider/tabProvider'
 import { SnackbarProvider } from '@/app/components/layouts/SnackbarProvider/SnackbarProvider'
 import RecoilProvider from '@/app/components/provider/recoilProvider.jsx'
+import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,7 +17,9 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <SnackbarProvider>
           <RecoilProvider>
-            <div className="body">{children}</div>
+            <TabProvider>
+              <div className="body">{children}</div>
+            </TabProvider>
           </RecoilProvider>
         </SnackbarProvider>
       </body>

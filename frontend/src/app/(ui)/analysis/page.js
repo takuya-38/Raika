@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useRouter } from 'next/navigation'
 
+import AnalysisHeader from '@/features/analysis/components/AnalysisHeader/AnalysisHeader'
+
 const Page = () => {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
@@ -29,11 +31,31 @@ const Page = () => {
     return <div></div>
   }
 
+  // const { value } = useTabContext()
+
+  // const renderTabContent = (value) => {
+  //   switch (value) {
+  //     case '1':
+  //       return <Welcome />
+  //     case '2':
+  //       return <About />
+  //     case '3':
+  //       return <Articles />
+  //   }
+  // }
+
   return (
-    <div className={styles.main}>
-      <Analysis />
-    </div>
+    <>
+      <AnalysisHeader />
+      {/* {renderTabContent(value)} */}
+    </>
   )
+
+  // return (
+  //   <div className={styles.main}>
+  //     <Analysis />
+  //   </div>
+  // )
 }
 
 export default Page
