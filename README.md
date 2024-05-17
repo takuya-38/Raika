@@ -86,7 +86,9 @@ Raika紹介動画：https://www.youtube.com/watch?v=RBFT8fD7ZXA
 
 ### 売上分析画面
 
-<img width="80%" alt="analysis_page" src="https://github.com/takuya-38/Raika/assets/128199416/38932387-d173-40ef-92e1-bf913c16faab">
+| Homeタブ | Yearタブ, Allタブ    |
+| ---- | ---- |
+| ![ Homeタブ ](https://github.com/takuya-38/Raika/assets/128199416/4605a723-fbfc-4080-bf22-bfae47ec2667) | ![Yearタブ, Allタブ ](https://github.com/takuya-38/Raika/assets/128199416/b42de7e0-5265-4603-875f-b4229b3b5a3a) |
 
 【機能】
 
@@ -95,8 +97,7 @@ Raika紹介動画：https://www.youtube.com/watch?v=RBFT8fD7ZXA
 <br>
 
 【詳細説明】
-
-- 今年の総売上・来店人数を表示。
+- Home(今日・今週・今月)、Year、ALLの3つの期間でまとめている。
 - グラフにカーソルを合わせると、具体的な数値を表示。
 
 <br>

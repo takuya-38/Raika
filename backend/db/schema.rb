@@ -17,11 +17,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_003437) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "menu_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "menus", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "menu_category_id", null: false
     t.string "name", null: false
     t.integer "price", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["menu_category_id"], name: "index_menus_on_menu_category_id"
   end
 
   create_table "sales", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -43,6 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_13_003437) do
     t.index ["sale_id"], name: "index_selected_menus_on_sale_id"
   end
 
+  add_foreign_key "menus", "menu_categories"
   add_foreign_key "sales", "age_groups"
   add_foreign_key "selected_menus", "menus"
   add_foreign_key "selected_menus", "sales"

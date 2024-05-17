@@ -13,6 +13,10 @@ import {
 } from '@/public/icons/svgIcon'
 import Image from 'next/image'
 import logoImage from '@/public/logo/Raika_logo.png'
+import { auth } from '@/lib/FirebaseConfig'
+
+import { signOut } from 'firebase/auth'
+import { useRouter } from 'next/navigation'
 
 const renderEvent = (event) => (
   <div key={event.id} className={styles.eventItem}>
@@ -29,6 +33,7 @@ const renderEvent = (event) => (
 )
 
 const Sidebar = () => {
+  const router = useRouter()
   const events = useRecoilValue(eventsAtom)
   const today = useMemo(() => dayjs().format('YYYY-MM-DD'), [])
 
@@ -36,6 +41,17 @@ const Sidebar = () => {
     () => events.filter((event) => event.start_date === today),
     [events, today],
   )
+
+  const handleClickLogout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log('Sign-out successful.')
+        router.push('/')
+      })
+      .catch((error) => {
+        console.error('An error happened during sign-out:', error)
+      })
+  }
 
   console.log('サイドバー実行')
 
@@ -67,9 +83,13 @@ const Sidebar = () => {
           </div>
 
           <div className={styles.menuBox}>
-            <Link className={styles.menu} href="#">
+            <Link
+              className={styles.menu}
+              onClick={handleClickLogout}
+              href="http://localhost:3000"
+            >
               <MenuIcon />
-              <p className={styles.menuText}>Setting</p>
+              <p className={styles.menuText}>Logout</p>
             </Link>
             <div className={styles.hoverDesign}></div>
           </div>

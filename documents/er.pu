@@ -30,12 +30,20 @@ entity "selected_menus" as selected_menus {
     updated_at      : date
 }
 
-
 entity "menus" as menus {
     * <<PK>> id
     --
+    * <<FK>> menu_category_id : integer
     * name : string
     * price : integer
+    created_at      : date
+    updated_at      : date
+}
+
+entity "menu_categories" as menu_categories {
+    * <<PK>> id
+    --
+    * name : string
     created_at      : date
     updated_at      : date
 }
@@ -43,5 +51,6 @@ entity "menus" as menus {
 sales }|..|| age_groups
 sales ||..|{ selected_menus
 selected_menus }|..|| menus
+menu_categories ||..|{ menus
 
 @enduml
