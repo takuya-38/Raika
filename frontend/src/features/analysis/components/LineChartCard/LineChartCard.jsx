@@ -9,10 +9,10 @@ import {
   ResponsiveContainer,
 } from 'recharts'
 import { Card } from '@mui/material'
-import styles from '@/features/analysis/components/Home/Home.module.css'
+import styles from '@/features/analysis/components/HomeTab/HomeTab.module.css'
 
 const LineChartCard = ({ title, data }) => (
-  <Card className={`${styles.card} ${styles.lineChart}`}>
+  <Card className={`${styles.card} ${styles.largeGrid}`}>
     <p className={styles.titleBox}>
       <span>{title}</span>
     </p>

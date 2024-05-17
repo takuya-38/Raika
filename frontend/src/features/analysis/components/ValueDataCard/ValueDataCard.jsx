@@ -1,4 +1,4 @@
-import styles from '@/features/analysis/components/Home/Home.module.css'
+import styles from '@/features/analysis/components/HomeTab/HomeTab.module.css'
 import { MoneyIcon, UsersIcon } from '@/public/icons/svgIcon'
 import { Card } from '@mui/material'
 
