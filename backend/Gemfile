@@ -9,6 +9,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 gem "rack-cors"
 gem "dotenv-rails"
+gem "faker"
 
 # Google関連
 gem "google-apis-calendar_v3"
