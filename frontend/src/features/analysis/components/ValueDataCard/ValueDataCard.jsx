@@ -10,11 +10,11 @@ const ValueDataCard = ({ data, className }) => {
       </p>
       <div className={styles.valueDataContent}>
         <UsersIcon />
-        <p>{data.users}</p>
+        <p>{data.visits}</p>
       </div>
       <div className={styles.valueDataContent}>
         <MoneyIcon />
-        <p>{data.money.toLocaleString()}</p>
+        <p>{data.sales.toLocaleString()}</p>
       </div>
     </Card>
   )
