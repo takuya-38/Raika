@@ -20,7 +20,7 @@ class SalesController < ApplicationController
     # # 曜日別来店数のデータ（今年、全期間）
     res[:visits_by_day] = fetch_visits_by_day
 
-    # # MenuRaito、GenderRaito、AgeRaitoのデータ（今月、今年、全期間）
+    # # Menuratio、Genderratio、Ageratioのデータ（今月、今年、全期間）
     populate_ratio_data(res)
 
     render json: res
@@ -100,9 +100,9 @@ class SalesController < ApplicationController
         monthly_sales_this_year: [],
         yearly_sales: [],
         visits_by_day: { this_year: [], all_time: [] },
-        menu_raito: { this_month: [], this_year: [], all_time: [] },
-        gender_raito: { this_month: [], this_year: [], all_time: [] },
-        age_raito: { this_month: [], this_year: [], all_time: [] }
+        menu_ratio: { this_month: [], this_year: [], all_time: [] },
+        gender_ratio: { this_month: [], this_year: [], all_time: [] },
+        age_ratio: { this_month: [], this_year: [], all_time: [] }
       }
     end
 
@@ -204,7 +204,7 @@ class SalesController < ApplicationController
         menus = range ? Menu.preload(:selected_menus).where(created_at: range) : Menu.preload(:selected_menus).all
         menus.group_by(&:menu_category_id).each do |category_id, category_menus|
           selected_menus_count = category_menus.sum { |menu| menu.selected_menus.count }
-          res[:menu_raito][key].push({
+          res[:menu_ratio][key].push({
             name: menu_categories.find { |category| category.id == category_id }.name,
             value: selected_menus_count
           })
@@ -212,14 +212,14 @@ class SalesController < ApplicationController
 
         sales = range ? Sale.where(created_at: range) : Sale.all
         sales.group(:gender).count.each do |gender, count|
-          res[:gender_raito][key].push({
+          res[:gender_ratio][key].push({
             name: gender == 1 ? "男性" : "女性",
             value: count
           })
         end
 
         sales.group(:age_group_id).count.each do |age_group_id, count|
-          res[:age_raito][key].push({
+          res[:age_ratio][key].push({
             name: age_groups.find { |group| group.id == age_group_id }.name,
             value: count
           })
