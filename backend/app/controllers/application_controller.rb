@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
   def authenticate
     Rails.logger.info(request.headers["Authorization"]&.split&.last)
     payload = decode(request.headers["Authorization"]&.split&.last)
-    Rails.logger.info(payload)
+    # Rails.logger.info(payload)
     raise AuthenticationError unless payload["user_id"]
   end
 

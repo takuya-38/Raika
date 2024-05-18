@@ -1,4 +1,5 @@
 class MenusController < ApplicationController
+  skip_before_action :authenticate, only: [:index]
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   before_action :set_menu, only: %i[ update destroy ]
 
