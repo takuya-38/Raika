@@ -1,6 +1,6 @@
 export const fetchMenus = async (idToken) => {
   try {
-    const res = await fetch('http://localhost:3001/menus', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/menus`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

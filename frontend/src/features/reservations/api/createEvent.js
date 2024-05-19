@@ -1,12 +1,15 @@
 export const createEvent = async (eventData) => {
   try {
-    const response = await fetch('http://localhost:3001/google_calendar', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_HOSTNAME}/google_calendar`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventData),
       },
-      body: JSON.stringify(eventData),
-    })
+    )
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
