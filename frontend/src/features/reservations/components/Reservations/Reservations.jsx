@@ -13,7 +13,6 @@ import { useSetRecoilState } from 'recoil'
 import { eventsAtom } from '@/app/components/store/events'
 import { fetchEvents } from '@/features/reservations/api/fetchEvents'
 import { useMenusData } from '@/features/reservations/hooks/useMenus'
-import { auth } from '@/lib/FirebaseConfig'
 
 const WEEK_START_DAY_OFFSET = 0
 
@@ -32,8 +31,7 @@ const handleTodayWeekClick = (setCurrentDate) => {
 const updateEventsData = async () => {
   const setEvents = useSetRecoilState(eventsAtom)
   try {
-    const idToken = await auth.currentUser.getIdToken()
-    const data = await fetchEvents(idToken)
+    const data = await fetchEvents()
     setEvents(data)
   } catch (error) {
     console.error('Error fetching events:', error)
