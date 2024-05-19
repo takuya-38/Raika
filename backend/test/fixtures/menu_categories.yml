@@ -1,0 +1,19 @@
+cut:
+  name: "カット"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
+
+color:
+  name: "カラー"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
+
+perm:
+  name: "パーマ"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
+
+other:
+  name: "その他"
+  created_at: 2023-04-01
+  updated_at: 2023-04-01
