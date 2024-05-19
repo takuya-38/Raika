@@ -27,6 +27,7 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
           cd backend
           bundle exec rails test
