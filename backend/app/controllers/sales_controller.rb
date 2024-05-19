@@ -27,7 +27,11 @@ class SalesController < ApplicationController
   end
 
   def show
-    render json: @sale, include: :selected_menus
+    if @sale
+      render json: @sale, include: :selected_menus
+    else
+      head :no_content
+    end
   end
 
   def create

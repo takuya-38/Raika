@@ -1,7 +1,9 @@
+'use client'
 import { auth } from '@/lib/FirebaseConfig'
 
 export const fetchEvents = async (idToken) => {
   try {
+    const idToken = await auth.currentUser.getIdToken()
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_HOSTNAME}/google_calendar`,
       {

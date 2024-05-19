@@ -37,7 +37,7 @@ const Registrations = () => {
   const reservationData = useRecoilValue(reservationDataAtom)
   const setEvents = useSetRecoilState(eventsAtom)
 
-  const salesData = useSalesData(reservationData.id)
+  const salesData = useSalesData(reservationData?.id)
 
   const handleSubmit = async (event) => {
     event.preventDefault()

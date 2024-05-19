@@ -66,7 +66,7 @@ const Sidebar = () => {
           <div className={styles.menuBox}>
             <Link
               className={styles.menu}
-              href={'http://localhost:3000/reservations'}
+              href={`${process.env.NEXT_PUBLIC_FRONT_HOSTNAME}/reservations`}
             >
               <CalendarIcon />
               <p className={styles.menuText}>Calendar</p>
@@ -75,7 +75,10 @@ const Sidebar = () => {
           </div>
 
           <div className={styles.menuBox}>
-            <Link className={styles.menu} href="http://localhost:3000/analysis">
+            <Link
+              className={styles.menu}
+              href={`${process.env.NEXT_PUBLIC_FRONT_HOSTNAME}/analysis`}
+            >
               <AnalyticsIcon />
               <p className={styles.menuText}>DashBoard</p>
             </Link>
@@ -86,7 +89,7 @@ const Sidebar = () => {
             <Link
               className={styles.menu}
               onClick={handleClickLogout}
-              href="http://localhost:3000"
+              href={process.env.NEXT_PUBLIC_FRONT_HOSTNAME}
             >
               <MenuIcon />
               <p className={styles.menuText}>Logout</p>
