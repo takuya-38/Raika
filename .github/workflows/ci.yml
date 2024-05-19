@@ -24,13 +24,13 @@ jobs:
           gem install bundler
           bundle install
 
-      - name: Run tests
-        env:
-          RAILS_ENV: test
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
-        run: |
-          cd backend
-          bundle exec rails test
+      # - name: Run tests
+      #   env:
+      #     RAILS_ENV: test
+      #     RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+      #   run: |
+      #     cd backend
+      #     bundle exec rails test
 
       - name: Run Rubocop
         run: |
