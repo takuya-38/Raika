@@ -157,8 +157,10 @@ class SalesController < ApplicationController
     end
 
     def fetch_yearly_sales
-      start_year = Sale.order(created_at: :asc).first.created_at.year
+      start_year = Sale.order(created_at: :asc).first&.created_at&.year
       end_year = Time.zone.now.year
+
+      start_year ||= end_year
 
       (start_year..end_year).map do |year|
         start_date = Time.zone.local(year, 1, 1)
