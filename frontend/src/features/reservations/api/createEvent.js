@@ -1,11 +1,16 @@
+'use client'
+import { auth } from '@/lib/FirebaseConfig'
+
 export const createEvent = async (eventData) => {
   try {
+    const idToken = await auth.currentUser.getIdToken()
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_HOSTNAME}/google_calendar`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + idToken,
         },
         body: JSON.stringify(eventData),
       },
