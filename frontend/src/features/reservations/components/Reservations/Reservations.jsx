@@ -14,7 +14,6 @@ import { eventsAtom } from '@/app/components/store/events'
 import { fetchEvents } from '@/features/reservations/api/fetchEvents'
 import { useMenusData } from '@/features/reservations/hooks/useMenus'
 import { auth } from '@/lib/FirebaseConfig'
-import { idText } from 'typescript'
 
 const WEEK_START_DAY_OFFSET = 0
 
