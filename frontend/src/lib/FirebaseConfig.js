@@ -10,8 +10,6 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_APPID,
 }
 
-if (typeof window !== 'undefined' && !getApps()?.length) {
-  initializeApp(firebaseConfig)
-}
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
 
 export const auth = getAuth()
