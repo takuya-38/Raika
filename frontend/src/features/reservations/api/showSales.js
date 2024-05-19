@@ -1,6 +1,8 @@
 export const showSales = async (id) => {
   try {
-    const response = await fetch(`http://localhost:3001/sales/${id}`)
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_HOSTNAME}/sales/${id}`,
+    )
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`)
