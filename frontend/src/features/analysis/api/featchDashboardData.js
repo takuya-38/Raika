@@ -1,6 +1,6 @@
 export const fetchDashboardData = async (idToken) => {
   try {
-    const res = await fetch('http://localhost:3001/sales', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_HOSTNAME}/sales`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
