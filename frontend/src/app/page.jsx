@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { GoogleAuthProvider } from 'firebase/auth'
-import dynamic from 'next/dynamic'
 import 'firebaseui/dist/firebaseui.css'
 
 import logoImage from '@/public/logo/Raika_logo.png'
@@ -12,39 +11,41 @@ import { auth } from '@/lib/FirebaseConfig'
 import { useSnackbarContext } from '@/app/components/layouts/SnackbarProvider/SnackbarProvider'
 import styles from './style.module.css'
 
-const FirebaseAuth = dynamic(
-  () => import('firebaseui').then((module) => module.auth),
-  { ssr: false },
-)
-
 export default function Home() {
   const router = useRouter()
   const { showSnackbar } = useSnackbarContext()
 
   useEffect(() => {
-    const ui =
-      FirebaseAuth.AuthUI.getInstance() || new FirebaseAuth.AuthUI(auth)
-    const uiConfig = {
-      signInOptions: [GoogleAuthProvider.PROVIDER_ID],
-      callbacks: {
-        signInSuccessWithAuthResult: (authResult, redirectUrl) => {
-          const user = authResult.user
-          if (user.email !== process.env.NEXT_PUBLIC_APPLY_MAIL) {
-            user.delete().then(() => {
-              if (showSnackbar) {
-                showSnackbar('error', '使用不可なアカウントです。')
+    if (typeof window !== 'undefined') {
+      const initializeFirebaseUI = async () => {
+        const firebaseui = await import('firebaseui')
+        const ui =
+          firebaseui.auth.AuthUI.getInstance() ||
+          new firebaseui.auth.AuthUI(auth)
+        const uiConfig = {
+          signInOptions: [GoogleAuthProvider.PROVIDER_ID],
+          callbacks: {
+            signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+              const user = authResult.user
+              if (user.email !== process.env.NEXT_PUBLIC_APPLY_MAIL) {
+                user.delete().then(() => {
+                  if (showSnackbar) {
+                    showSnackbar('error', '使用不可なアカウントです。')
+                  }
+                })
+              } else {
+                console.log(user.email)
+                router.push('/reservations')
               }
-            })
-          } else {
-            console.log(user.email)
-            router.push('/reservations')
-          }
-          return false
-        },
-      },
-      signInFlow: 'popup',
+              return false
+            },
+          },
+          signInFlow: 'popup',
+        }
+        ui.start('#firebaseui-auth-container', uiConfig)
+      }
+      initializeFirebaseUI()
     }
-    ui.start('#firebaseui-auth-container', uiConfig)
   }, [showSnackbar])
 
   return (
