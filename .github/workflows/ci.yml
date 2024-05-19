@@ -20,6 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          cd Raika/backend
           gem install bundler
           bundle install
 
@@ -27,7 +28,10 @@ jobs:
         env:
           RAILS_ENV: test
         run: |
+          cd Raika/backend
           bundle exec rails test
 
       - name: Run Rubocop
-        run: bundle exec rubocop
+        run: |
+          cd Raika/backend
+          bundle exec rubocop
