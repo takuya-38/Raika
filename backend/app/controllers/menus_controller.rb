@@ -37,7 +37,7 @@ class MenusController < ApplicationController
     end
 
     def menu_params
-      params.require(:menu).permit(:name, :price)
+      params.require(:menu).permit(:menu_category_id, :name, :price)
     end
 
     def record_not_found
