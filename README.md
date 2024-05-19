@@ -109,6 +109,7 @@ Raika紹介動画：https://www.youtube.com/watch?v=RBFT8fD7ZXA
 | Frontend | React / Next.js / Tailwind CSS / eslint&prettier |
 | Backend | Rails / minitest / RuboCop |
 | Database | MySQL |
+| infra | Amazon Web Service  |
 | Environment | Docker, Docker compose |
 | etc. | Git, GitHub, Firebase Authorization, Google Calendar API |
 
@@ -116,4 +117,10 @@ Raika紹介動画：https://www.youtube.com/watch?v=RBFT8fD7ZXA
 
 ## インフラ構成図
 
-<img width="80%" alt="analysis_page" src="https://github.com/takuya-38/Raika/assets/128199416/42fdb051-8c7f-4942-b0c6-df28b25ad17a">
+<img width="80%" alt="er" src="https://github.com/takuya-38/Raika/assets/128199416/f573fe3f-b188-47ac-885b-10b6005b6459">
+
+<br>
+
+## インフラ構成図
+
+<img width="80%" alt="Infrastructure " src="https://github.com/takuya-38/Raika/assets/128199416/2c2921e3-2499-497f-b1cb-4735b46b467b">
