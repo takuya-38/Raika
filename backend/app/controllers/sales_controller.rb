@@ -171,7 +171,7 @@ class SalesController < ApplicationController
       days_of_week_jp = %w[月 火 水 木 金 土 日]
       days_of_week = %w[Sunday Monday Tuesday Wednesday Thursday Friday Saturday]
 
-      [
+      output = [
         { key: :this_year, range: Time.zone.now.all_year },
         { key: :all_time, range: nil }
       ].map do |data|
@@ -186,7 +186,8 @@ class SalesController < ApplicationController
         end
 
         [key, result]
-      end.to_h
+      end
+      output.to_h
     end
 
     def populate_ratio_data(res)

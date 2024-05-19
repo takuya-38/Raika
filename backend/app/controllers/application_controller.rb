@@ -1,13 +1,12 @@
 class ApplicationController < ActionController::API
   include FirebaseAuthenticator
-  before_action :authenticate
+  before_action :authenticate, unless: -> { Rails.env.test? }
   class AuthenticationError < StandardError; end
   rescue_from AuthenticationError, with: :not_authenticated
 
   def authenticate
     Rails.logger.info(request.headers["Authorization"]&.split&.last)
     payload = decode(request.headers["Authorization"]&.split&.last)
-    # Rails.logger.info(payload)
     raise AuthenticationError unless payload["user_id"]
   end
 

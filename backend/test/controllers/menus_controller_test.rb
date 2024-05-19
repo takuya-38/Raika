@@ -3,6 +3,7 @@ require "test_helper"
 class MenusControllerTest < ActionDispatch::IntegrationTest
   setup do
     @menu = menus(:cut)
+    @menu_category = MenuCategory.create!(name: "test")
   end
 
   test "should get index" do
@@ -12,7 +13,7 @@ class MenusControllerTest < ActionDispatch::IntegrationTest
 
   test "should create menu" do
     assert_difference("Menu.count") do
-      post menus_url, params: { menu: { name: "New Menu", price: 1000 } }, as: :json
+      post menus_url, params: { menu: { menu_category_id: @menu_category.id, name: "New Menu", price: 1000 } }, as: :json
     end
 
     assert_response :created

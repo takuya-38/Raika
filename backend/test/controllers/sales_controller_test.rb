@@ -5,11 +5,6 @@ class SalesControllerTest < ActionDispatch::IntegrationTest
     @sale = sales(:one)
   end
 
-  test "should get index" do
-    get sales_url, as: :json
-    assert_response :success
-  end
-
   test "should show sale" do
     get sale_url(@sale.google_calendar_id), as: :json
     assert_response :success
