@@ -11,7 +11,7 @@
 Raikaは、個人経営で美容師を営む父親の「予約と売上の管理を改善したい」という想いを聞き、<br>
 父親のニーズに特化した統合予約・売上管理システムです。<br>
 
-Raika紹介動画：https://www.youtube.com/watch?v=RBFT8fD7ZXA
+Raika紹介動画：https://www.youtube.com/watch?v=ZnxGBfYCIYg
 
 <br>
 
